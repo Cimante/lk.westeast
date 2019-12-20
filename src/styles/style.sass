@@ -1,0 +1,103 @@
+@import "./node_modules/bootstrap/scss/bootstrap.scss"
+@import ui
+
+.log-in 
+	display: flex
+	justify-content: center
+	align-items: center
+	position: absolute
+	height: 100%
+	width: 100%
+	flex-direction: column
+	background: url('../../images/bg_panel.jpg')
+	background-size: 100% 100%
+	background-repeat: no-repeat
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400
+	color: white
+
+.auth-form
+	display: flex
+	flex-direction: column
+	margin-top: 4rem
+	label 
+		margin: 10px 0px 5px 0px
+	input 
+		border: 1px solid darken($dark, 10%)
+		background-color: $dark !important
+		color: white
+		&:active, &:focus
+			background-color: $dark !important
+			border-color: darken($yellow, 10%)
+			box-shadow: 0 0 0 .2rem rgba($yellow, .2)
+			font-weight: 400
+			color: white
+	.input-group-text
+		background-color: $dark
+		border: 1px solid darken($dark, 10%)
+		i 
+			color: darken(white, 20%)
+			font-weight: 700
+	a 
+		color: white !important
+		margin-top: 1rem
+
+.dashboard
+	font-family: 'Source Sans Pro', sans-serif;
+	background-image: url(../../images/user_panel_bg.jpg)
+	height: 100vh
+	color: white
+	.navbar-brand
+		max-width: 96px
+	a.nav-item 
+		color: darken(white, 20%)
+		&:hover 
+			text-decoration: none
+			color: white
+	.controls 
+		margin-top: 16px
+		.controls--exit
+			color: darken($yellow, 5%)
+
+	.navigate
+		background-color: black
+		ul 
+			border: 1px solid #e5e5e5
+			border-radius: 4px
+			padding: 8px
+			li 
+				border-radius: 4px
+				list-style-type: none
+				&:hover	
+					background-color: darken(white, 80%)
+				a 
+					display: block
+					padding: 8px
+					color: darken(white, 20%)
+					&:hover
+						text-decoration: none
+						color: white
+span.badge 
+	font-size: 14px
+
+.navigate--selected
+	color: white !important
+	background-color: darken(white, 70%)
+
+.dark-field
+	input 
+		border: 1px solid darken($dark, 10%)
+		background-color: $dark !important
+		color: white
+		&:active, &:focus
+			background-color: $dark !important
+			border-color: darken($yellow, 10%)
+			box-shadow: 0 0 0 .2rem rgba($yellow, .2)
+			font-weight: 400
+			color: white
+	.input-group-text
+		background-color: $dark
+		border: 1px solid darken($dark, 10%)
+		i 
+			color: darken(white, 20%)
+			font-weight: 700

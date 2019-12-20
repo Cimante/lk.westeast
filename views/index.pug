@@ -1,0 +1,21 @@
+include header
+
+section.log-in
+	img(src="images/logo2.png", alt="logo")
+	form.auth-form
+		span.text-center Введите ваш email и пароль
+		.input-group.mt-4
+			.input-group-prepend
+				span.input-group-text#email-icon 
+					i.fas.fa-at
+			input#login.form-control(type="email" placeholder="example@mail.ru" aria-describedby="email-icon")
+
+		.input-group.mt-3
+			.input-group-prepend
+				span.input-group-text#pass-icon
+					i.fas.fa-key
+			input#pass.form-control(type="password" placeholder="Пароль")
+	a#btn_log.btn.btn-dark.mt-3(href="/dashboard") Войти
+	a.mt-5(href="http://westeast.biz") Вернуться назад
+
+include scripts

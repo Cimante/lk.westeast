@@ -1,0 +1,93 @@
+include header
+
+.dashboard
+	nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
+		a.navbar-brand(href="/dashboard")
+			img.w-100(src="images/logo2.png", alt="logo")
+		button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+			span.navbar-toggler-icon
+		#navbarNavAltMarkup.collapse.navbar-collapse
+			.navbar-nav
+				span.nav-item(href='#') Вы вошли как {{ username }}
+					br
+					a.badge.badge-pill.badge-danger(href="/") Выйти
+				a.btn.btn-sm.btn-pill.btn-outline-success.nav-item.d-flex.align-items-center.ml-5(href='/') 
+					i.far.fa-user.mr-2
+					| Добавить пользователя
+				a.btn.btn-sm.btn-pill.btn-outline-success.nav-item.d-flex.align-items-center.ml-2(href='/') 
+					i.far.fa-building.mr-2
+					| Добавить компанию
+
+		
+	section.container-fluid.animated.fadeIn.faster
+		.row
+			.col-lg-3.col-xl-2
+				aside.navigate.mt-5
+					ul
+						li.navigate--selected
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Клиенты и компании
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Заявки на звонок
+									span.badge.badge-light 0
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Пропуск ВНОС/ВЫНОС
+									span.badge.badge-light 0
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span ПОРЧА/УТРАЧА карт
+									span.badge.badge-light 0
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Постоянный доступ
+									span.badge.badge-light 0
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Заказ документов
+									span.badge.badge-light 0
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Пропуски на авто
+									span.badge.badge-light 0
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Пропуски на персону
+									span.badge.badge-light 0
+						li
+							a(href="#")
+								.d-flex.align-items-center.justify-content-between
+									span Заявки на работы
+									span.badge.badge-light 0
+			.col-lg-9.col-xl-10
+				.mt-5
+					.dark-field.form-group.w-25
+						.input-group.mb-3
+							.input-group-prepend
+								span.input-group-text#search
+									i.fas.fa-search
+							input#search.form-control(type="email" placeholder="example@mail.ru" aria-describedby="search")
+
+					table.table.table-dark.table-striped
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Фамилия
+								th(scope="col") Имя
+								th(scope="col") Отчество
+								th(scope="col") Email
+								th(scope="col")
+						tbody
+							each item in items
+								include _table-item
+
+include scripts
