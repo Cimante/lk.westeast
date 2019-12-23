@@ -5,16 +5,10 @@
 	display: flex
 	justify-content: center
 	align-items: center
-	position: absolute
-	height: 100%
-	width: 100%
 	flex-direction: column
-	background: url('../../images/bg_panel.jpg')
-	background-size: 100% 100%
-	background-repeat: no-repeat
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400
-	color: white
+	a 
+		color: white !important
+		margin-top: 1rem
 
 .auth-form
 	display: flex
@@ -38,9 +32,6 @@
 		i 
 			color: darken(white, 20%)
 			font-weight: 700
-	a 
-		color: white !important
-		margin-top: 1rem
 
 .dashboard
 	font-family: 'Source Sans Pro', sans-serif;
@@ -77,6 +68,33 @@
 					&:hover
 						text-decoration: none
 						color: white
+
+	.far.fa-times-circle
+		font-size: 24px
+		color: darken($red, 10%) !important
+		transition: all .2s ease
+		&:hover 
+			color: $red !important
+			cursor: pointer
+			transition: all .2s ease
+
+	.table-dark 
+		background-color: transparent
+		& thead tr th, tr td
+			border: none !important
+		& thead tr
+			text-transform: uppercase
+	.modal
+		.modal-title
+			font-size: 24px
+			font-weight: 600
+		.modal-content
+			background-color: darken($dark, 20%) !important
+		.modal-header, .modal-footer
+			border: none
+		.close
+			text-shadow: none
+
 span.badge 
 	font-size: 14px
 
@@ -101,3 +119,30 @@ span.badge
 		i 
 			color: darken(white, 20%)
 			font-weight: 700
+
+.bg
+	position: absolute
+	height: 100%
+	width: 100%
+	background: url('../../images/bg_panel.jpg')
+	background-size: 100% 100%
+	background-repeat: no-repeat
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400
+	color: white
+
+.register 
+	a 
+		color: white !important
+		margin-top: 1rem
+	h1 
+		margin-bottom: 0
+		font-size: 2rem
+	.register--logo
+		max-width: 120px
+
+.create-success 
+	display: flex
+	justify-content: center
+	align-items: center
+	flex-direction: column

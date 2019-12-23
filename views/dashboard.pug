@@ -6,17 +6,20 @@ include header
 			img.w-100(src="images/logo2.png", alt="logo")
 		button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
 			span.navbar-toggler-icon
+
 		#navbarNavAltMarkup.collapse.navbar-collapse
 			.navbar-nav
-				span.nav-item(href='#') Вы вошли как {{ username }}
+				span.nav-item.mr-5(href='#') Вы вошли как #{login}
 					br
 					a.badge.badge-pill.badge-danger(href="/") Выйти
-				a.btn.btn-sm.btn-pill.btn-outline-success.nav-item.d-flex.align-items-center.ml-5(href='/') 
-					i.far.fa-user.mr-2
-					| Добавить пользователя
-				a.btn.btn-sm.btn-pill.btn-outline-success.nav-item.d-flex.align-items-center.ml-2(href='/') 
-					i.far.fa-building.mr-2
-					| Добавить компанию
+				if (role == 'admin')
+					button.btn.btn-sm.btn-outline-success.nav-item.mr-4(type="button" data-toggle="modal" data-target="#exampleModal") 
+						//- .d-flex.align-items-center
+						i.far.fa-user.mr-2
+						| Добавить пользователя
+					a.nav-item.d-flex.align-items-center.mr-4(href='/dashboard') 
+						i.far.fa-building.mr-2
+						| Добавить компанию
 
 		
 	section.container-fluid.animated.fadeIn.faster
@@ -76,7 +79,7 @@ include header
 								span.input-group-text#search
 									i.fas.fa-search
 							input#search.form-control(type="email" placeholder="example@mail.ru" aria-describedby="search")
-
+					h1.mb-4 Клиенты и компании
 					table.table.table-dark.table-striped
 						thead
 							tr
@@ -87,7 +90,8 @@ include header
 								th(scope="col") Email
 								th(scope="col")
 						tbody
-							each item in items
-								include _table-item
-
+							if (typeof item !== 'undefined')
+								each item in items
+									include _clients--table-item
+	include _add--user
 include scripts

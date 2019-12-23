@@ -12,10 +12,6 @@ const cleanCSS = require('gulp-clean-css');
 gulp.task('sass', () => {
     return gulp.src('src/styles/**/style.sass')
     .pipe(sass())
-    .pipe(purgecss({
-        content: ['views/**/*.pug'],
-        rejected: false
-    }))
     .pipe(autoprefixer())
     .pipe(cleanCSS({
         compatibility: 'ie8'

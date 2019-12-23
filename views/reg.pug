@@ -1,0 +1,127 @@
+include header
+
+main.register.bg
+
+	.container.mt-4.animated.fadeIn.faster
+		.row 
+			.col-12
+				.d-flex.justify-content-start.align-items-center
+					img.register--logo.mr-5(src="images/logo2.png", alt="logo")
+					.title
+						h1 Регистрация нового пользователя
+						small Все поля обязательны к заполнению
+		.row 
+			.col-12
+				form(action="/create-user" method="POST")
+					.container
+						.row
+							.col-4.mt-5
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-4
+										label(for="LastName") Фамилия
+									.col-8
+										input#LastName.form-control(type="text" name="LastName" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-4
+										label(for="FirstName") Имя
+									.col-8
+										input#FirstName.form-control(type="text" name="FirstName" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-4
+										label(for="MiddleName") Отчество
+									.col-8
+										input#MiddleName.form-control(type="text" name="MiddleName" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5
+										label(for="Office") Номер офиса
+									.col-7
+										input#Office.form-control(type="text" name="Office" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-4
+										label(for="Email") Email
+									.col-8
+										input#Email.form-control(type="email" name="Email" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-4
+										label(for="Phone") Телефон
+									.col-8
+										input#Phone.form-control(type="text" name="Phone" required)
+
+							.offset-1.col-7.mt-5
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="FullCompanyName") Полное название компании
+									.col-7
+										input#FullCompanyName.form-control(type="text" name="FullCompanyName" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="SmallCompanyName") Краткое название компании
+									.col-7
+										input#SmallCompanyName.form-control(type="text" name="SmallCompanyName" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="Address") Юр. адрес
+									.col-7
+										input#Address.form-control(type="text" name="Address" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="INN") ИНН
+									.col-7
+										input#INN.form-control(type="text" name="INN" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="KPP") КПП
+									.col-7
+										input#KPP.form-control(type="text" name="KPP" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="OGRN") ОГРН
+									.col-7
+										input#OGRN.form-control(type="text" name="OGRN" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="OKPO") ОКПО
+									.col-7
+										input#OKPO.form-control(type="text" name="OKPO" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="Bank") Банк
+									.col-7
+										input#Bank.form-control(type="text" name="Bank" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="BIK") БИК
+									.col-7
+										input#BIK.form-control(type="text" name="BIK" required)
+
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="CorporateAcc") Корпоративный счёт
+									.col-7
+										input#CorporateAcc.form-control(type="text" name="CorporateAcc" required)
+								.row.form-group.dark-field.d-flex.align-items-center
+									.col-5.text-right
+										label(for="PaymentAcc") Расчётный счёт
+									.col-7
+										input#PaymentAcc.form-control(type="text" name="PaymentAcc" required)
+
+						.row
+							.col-12
+								.d-flex.justify-content-end.mt-5
+									button.btn.btn-success.btn-lg(type="submit") Зарегистрироваться
+								
+
+include scripts
