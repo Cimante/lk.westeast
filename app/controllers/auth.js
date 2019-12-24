@@ -6,21 +6,21 @@ const { jwtSecret } = require('../../config/app');
 const User = mongoose.model('User');
 
 const signIn = (req, res) => {
-	// const { email, password } = JSON.parse(JSON.stringify(req.body));
-	const email = req.body.email;
-	const password = req.body.pass;
-
-	User.findOne({ Email: email })
+	const { Email, pass } = JSON.parse(JSON.stringify(req.body));
+	User.findOne({ Email: Email })
 		.exec()
 		.then((user) => {
 			if (!user) {
 				res.status(401).json({ message: 'User does not exist...' });
 			}
+			const isValid = bCrypt.compareSync(pass, user.Password);
 
-			const isValid = bCrypt.compareSync(password, user.Password);
 			if (isValid) {
 				const token = jwt.sign(user._id.toString(), jwtSecret);
-				res.render('dashboard', {login: user.Email, role: user.Role});
+				res.status(200).json({ token: token });
+				
+				// res.render('dashboard', {login: user.Email, role: user.Role});
+				
 			} else {
 				res.status(401).json({message: 'Invalid credentials'})
 			}

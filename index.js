@@ -34,6 +34,10 @@ app.get('/', function (req, res) {
 app.get('/reg', function (req, res) {
   res.render('reg.pug');
 });
+
+app.get('/create-success', function (req, res) {
+  res.render('create-success');
+})
 /*
 app.get('/dashboard', function (req, res) {
   res.render('dashboard.pug', {items: data});

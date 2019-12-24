@@ -15,7 +15,7 @@ const createUser = (req, res, next) => {
 	});
 	console.log(`PASS: ${password}`);
 	console.log(tempData);
-	res.render('create-success', {email: tempData.Email});
+	res.send(tempData.Email);
 }
 
 module.exports = {
