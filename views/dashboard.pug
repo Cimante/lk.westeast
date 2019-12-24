@@ -9,7 +9,8 @@ include header
 
 		#navbarNavAltMarkup.collapse.navbar-collapse
 			.navbar-nav
-				span.nav-item.mr-5(href='#') Вы вошли как #{login}
+				span.nav-item.mr-5(href='#') Вы вошли как 
+					strong #{login}
 					br
 					a.badge.badge-pill.badge-danger(href="/") Выйти
 				if (role == 'admin')
@@ -27,10 +28,11 @@ include header
 			.col-lg-3.col-xl-2
 				aside.navigate.mt-5
 					ul
-						li.navigate--selected
-							a(href="#")
-								.d-flex.align-items-center.justify-content-between
-									span Клиенты и компании
+						if (role === 'admin')
+							li
+								a(href="#")
+									.d-flex.align-items-center.justify-content-between
+										span Клиенты и компании
 						li
 							a(href="#")
 								.d-flex.align-items-center.justify-content-between
@@ -78,7 +80,7 @@ include header
 							.input-group-prepend
 								span.input-group-text#search
 									i.fas.fa-search
-							input#search.form-control(type="email" placeholder="example@mail.ru" aria-describedby="search")
+							input#search.form-control(type="text" aria-describedby="search")
 					h1.mb-4 Клиенты и компании
 					table.table.table-dark.table-striped
 						thead

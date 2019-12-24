@@ -12,7 +12,7 @@ main.register.bg
 						small Все поля обязательны к заполнению
 		.row 
 			.col-12
-				form(action="/create-user" method="POST")
+				form(action="/add-user" method="POST")
 					.container
 						.row
 							.col-4.mt-5
@@ -121,7 +121,7 @@ main.register.bg
 						.row
 							.col-12
 								.d-flex.justify-content-end.mt-5
-									button.btn.btn-success.btn-lg(type="submit") Зарегистрироваться
+									button.btn.btn-success.btn-lg#sendNewUser(type="submit") Зарегистрироваться
 								
 
 include scripts
