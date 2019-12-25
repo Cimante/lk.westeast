@@ -1,25 +1,34 @@
 // здесь будем брать данные из полей форм, проверять их и стрелять поповерами
-$(document).ready(function() {
+function ReadUsers() {
 	$.ajax({
 		url: '/readusers',
 		type: 'POST',
-		contentType: 'application/json'
+		contentType: 'application/json',
+		data: ''
 		}).done(function(users) {
-			for (let user in users.response) {
-				$('tbody#contentTBody').append(`
-				<tr>
-				<td>${users.response[user].Office}</td>
-				<td>${users.response[user].LastName}</td>
-				<td>${users.response[user].FirstName}</td>
-				<td>${users.response[user].MiddleName}</td>
-				<td>${users.response[user].Email}</td>
-				</tr>
-				`);
-			}	
+			$(document).ready(function() {
+				for (let user in users.response) {
+					$('tbody#contentTBody').append(`
+					<tr>
+					<td>${users.response[user].Office}</td>
+					<td>${users.response[user].LastName}</td>
+					<td>${users.response[user].FirstName}</td>
+					<td>${users.response[user].MiddleName}</td>
+					<td>${users.response[user].Email}</td>
+					</tr>
+					`);
+				}	
+			})
 		}).fail(function() {
 			alert('Караул, нихрена не получилось!');
 	});
-	
+};
+
+window.onload = function() {
+	ReadUsers();
+}
+
+$(document).ready(function() {
 	if (window.location.pathname === '/create-success') {
 		if (localStorage.getItem('new_email')) {
 			$('#new-email').text(`${localStorage.getItem('new_email')} `);

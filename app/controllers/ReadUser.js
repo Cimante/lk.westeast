@@ -11,7 +11,7 @@ const UsersList = (req, res) => {
 			userMap[user._id] = user;
 		});
 
-	res.status(200).json({ response: userMap });
+	res.json({ response: userMap });
 	});
 }
 
