@@ -27,8 +27,13 @@ mongoose.connect(mongoUri, mongoPresets)
 
 //app.locals.collectionUsers = client.db(dbname).collection('users');
 
-app.get('/', function (req, res) {
-  res.render('index.pug');
+app.get('/', (req, res) => {
+  const id = req.session.id;
+  const email = req.session.email;
+  const name = req.session.name;
+  const role = req.session.role;
+
+  res.render('index.pug', {user: {id, email, name, role}});
 });
 
 app.get('/reg', function (req, res) {
@@ -38,11 +43,11 @@ app.get('/reg', function (req, res) {
 app.get('/create-success', function (req, res) {
   res.render('create-success');
 })
-/*
-app.get('/dashboard', function (req, res) {
-  res.render('dashboard.pug', {items: data});
-});
 
+app.get('/dashboard', function (req, res) {
+  res.render('dashboard.pug');
+});
+/*
 app.post('/adduser', function (req, res) {
   data.push(JSON.parse(JSON.stringify(req.body)));
   res.redirect('/dashboard');
@@ -84,4 +89,5 @@ function isFound(req, res) {
 }
 
 app.post('/auth', findUser, isFound);
+
 */

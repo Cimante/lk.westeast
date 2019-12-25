@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bCrypt = require('bcryptjs');
+const sendPass = require('./sendPass');
 
 const newUser = mongoose.model('User');
 
@@ -13,8 +14,10 @@ const createUser = (req, res, next) => {
 	newUser.create(tempData, function(err) {
 		if (err) throw err;
 	});
-	console.log(`PASS: ${password}`);
-	console.log(tempData);
+	// console.log(`PASS: ${password}`);
+
+	sendPass(password, tempData.Email);
+
 	res.send(tempData.Email);
 }
 

@@ -2,9 +2,9 @@
 
 $(document).ready(function() {
 	if (window.location.pathname === '/create-success') {
-		if (localStorage.getItem('email')) {
-			$('#new-email').text(`${localStorage.getItem('email')} `);
-			localStorage.removeItem('email');
+		if (localStorage.getItem('new_email')) {
+			$('#new-email').text(`${localStorage.getItem('new_email')} `);
+			localStorage.removeItem('new_email');
 		} else {
 			window.location.replace('/');
 		}
@@ -39,7 +39,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(data)
 		}).done(function(data) {
-			localStorage.setItem('email', data);
+			localStorage.setItem('new_email', data);
 			window.location.replace('/create-success');
 		});
 	});
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		let data = {
-			login: $('input#login').val(),
+			email: $('input#login').val(),
 			password: $('input#pass').val()
 		};
 
@@ -58,7 +58,30 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(data)
 		}).done(function(data) {
-			console.log(data);
+			if (data.ok) {
+				if (!$('span#invalid').hasClass('d-none')) {
+					$('span#invalid').addClass('d-none');
+				}
+				window.location.reload();
+			}
+		}).fail(function(data) {
+			data = JSON.parse(JSON.stringify(data));
+			$('span#invalid').removeClass('d-none').addClass('text-center').text(data.responseJSON.message);
 		})
 	});
+
+	if (localStorage.getItem('name') && window.location.pathname === '/dashboard') {
+		$('#username').text(localStorage.getItem('name'));
+	}
+
+	$('button#logout').click(function() {
+		$.ajax({
+			url: '/logout',
+			type: 'POST',
+			data: null
+		}).done(function() {
+			alert('EXIT SUCCESS');
+		})
+	});
+
 });

@@ -1,28 +1,31 @@
 const mongoose = require('mongoose');
 const bCrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { jwtSecret } = require('../../config/app');
 
 const User = mongoose.model('User');
 
 const signIn = (req, res) => {
-	const { Email, pass } = JSON.parse(JSON.stringify(req.body));
-	User.findOne({ Email: Email })
+	// if (req.session.user) return res.redirect('/dashboard');
+	const { email, password } = JSON.parse(JSON.stringify(req.body));
+
+	User.findOne({ Email: email })
 		.exec()
 		.then((user) => {
 			if (!user) {
-				res.status(401).json({ message: 'User does not exist...' });
+				res.status(401).json({ message: 'Неверная пара email / пароль' });
 			}
-			const isValid = bCrypt.compareSync(pass, user.Password);
+			const isValid = bCrypt.compareSync(password, user.Password);
 
 			if (isValid) {
-				const token = jwt.sign(user._id.toString(), jwtSecret);
-				res.status(200).json({ token: token });
-				
-				// res.render('dashboard', {login: user.Email, role: user.Role});
+				req.session.email = user.Email;
+				req.session.name = user.FirstName;
+				req.session.role = user.Role
+
+				res.status(200).json({ 
+					ok: true
+				});
 				
 			} else {
-				res.status(401).json({message: 'Invalid credentials'})
+				res.status(401).json({ message: 'Неверная пара email / пароль' });
 			}
 		})
 		.catch(err => res.status(500).json({message: err.message}));

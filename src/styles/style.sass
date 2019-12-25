@@ -101,6 +101,19 @@
 span.badge 
 	font-size: 14px
 
+button.badge 
+	border: none
+	&:hover
+		background-color: darken(#dc3545, 10%)
+		cursor: pointer
+
+span#invalid 
+	font-weight: 600
+	color: lighten($red, 15%)
+	background-color: $dark
+	padding: 0px 8px 0px 8px
+	border-radius: 2px
+
 .dark-field
 	input 
 		border: 1px solid darken($dark, 10%)

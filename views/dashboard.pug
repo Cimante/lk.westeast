@@ -1,5 +1,3 @@
-include header
-
 .dashboard
 	nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
 		a.navbar-brand(href="/dashboard")
@@ -9,26 +7,25 @@ include header
 
 		#navbarNavAltMarkup.collapse.navbar-collapse
 			.navbar-nav
-				span.nav-item.mr-5(href='#') Вы вошли как 
-					strong #{login}
+				span.nav-item.mr-5(href='#') Здравствуйте, 
+					strong #{user.name}
+					| !
 					br
-					a.badge.badge-pill.badge-danger(href="/") Выйти
-				if (role == 'admin')
+					a.badge.badge-pill.badge-danger#logout(href="/logout") Выйти
+				if (user.role === 'admin')
 					button.btn.btn-sm.btn-outline-success.nav-item.mr-4(type="button" data-toggle="modal" data-target="#exampleModal") 
-						//- .d-flex.align-items-center
 						i.far.fa-user.mr-2
 						| Добавить пользователя
 					a.nav-item.d-flex.align-items-center.mr-4(href='/dashboard') 
 						i.far.fa-building.mr-2
 						| Добавить компанию
-
 		
 	section.container-fluid.animated.fadeIn.faster
 		.row
 			.col-lg-3.col-xl-2
 				aside.navigate.mt-5
 					ul
-						if (role === 'admin')
+						if (user.role === 'admin')
 							li
 								a(href="#")
 									.d-flex.align-items-center.justify-content-between
@@ -74,26 +71,32 @@ include header
 									span Заявки на работы
 									span.badge.badge-light 0
 			.col-lg-9.col-xl-10
-				.mt-5
-					.dark-field.form-group.w-25
-						.input-group.mb-3
-							.input-group-prepend
-								span.input-group-text#search
-									i.fas.fa-search
-							input#search.form-control(type="text" aria-describedby="search")
-					h1.mb-4 Клиенты и компании
-					table.table.table-dark.table-striped
-						thead
-							tr
-								th(scope="col") Номер офиса
-								th(scope="col") Фамилия
-								th(scope="col") Имя
-								th(scope="col") Отчество
-								th(scope="col") Email
-								th(scope="col")
-						tbody
-							if (typeof item !== 'undefined')
-								each item in items
-									include _clients--table-item
+				.d-flex.justify-content-between
+					.mt-5
+						.dark-field.form-group
+							.input-group.mb-3
+								.input-group-prepend
+									span.input-group-text#search
+										i.fas.fa-search
+								input#search.form-control(type="text" aria-describedby="search")
+					.mt-5.mr-5
+						button.btn.btn-primary
+							i.fas.fa-plus.mr-2
+							| Добавить заявку
+
+				h1.mb-4 Клиенты и компании
+				table.table.table-dark.table-striped
+					thead
+						tr
+							th(scope="col") Номер офиса
+							th(scope="col") Фамилия
+							th(scope="col") Имя
+							th(scope="col") Отчество
+							th(scope="col") Email
+							th(scope="col")
+					tbody
+						if (typeof item !== 'undefined')
+							each item in items
+								include _clients--table-item
 	include _add--user
 include scripts
