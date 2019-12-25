@@ -5,11 +5,9 @@
 		button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
 			span.navbar-toggler-icon
 
-		#navbarNavAltMarkup.collapse.navbar-collapse
+		#navbarNavAltMarkup.collapse.navbar-collapse.ml-3
 			.navbar-nav
-				span.nav-item.mr-5(href='#') Здравствуйте, 
-					strong #{user.name}
-					| !
+				span.nav-item.mr-5(href='#') Здравствуйте, #{user.name}
 					br
 					a.badge.badge-pill.badge-danger#logout(href="/logout") Выйти
 				if (user.role === 'admin')
@@ -84,7 +82,7 @@
 							i.fas.fa-plus.mr-2
 							| Добавить заявку
 
-				h1.mb-4 Клиенты и компании
+				h1.mb-4#heading
 				table.table.table-dark.table-striped
 					thead
 						tr
@@ -93,10 +91,7 @@
 							th(scope="col") Имя
 							th(scope="col") Отчество
 							th(scope="col") Email
-							th(scope="col")
-					tbody
-						if (typeof item !== 'undefined')
-							each item in items
-								include _clients--table-item
+					tbody#contentTBody
+						
 	include _add--user
 include scripts

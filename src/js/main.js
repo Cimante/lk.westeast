@@ -1,6 +1,25 @@
 // здесь будем брать данные из полей форм, проверять их и стрелять поповерами
-
 $(document).ready(function() {
+	$.ajax({
+		url: '/readusers',
+		type: 'POST',
+		contentType: 'application/json'
+		}).done(function(users) {
+			for (let user in users.response) {
+				$('tbody#contentTBody').append(`
+				<tr>
+				<td>${users.response[user].Office}</td>
+				<td>${users.response[user].LastName}</td>
+				<td>${users.response[user].FirstName}</td>
+				<td>${users.response[user].MiddleName}</td>
+				<td>${users.response[user].Email}</td>
+				</tr>
+				`);
+			}	
+		}).fail(function() {
+			alert('Караул, нихрена не получилось!');
+	});
+	
 	if (window.location.pathname === '/create-success') {
 		if (localStorage.getItem('new_email')) {
 			$('#new-email').text(`${localStorage.getItem('new_email')} `);
@@ -69,11 +88,6 @@ $(document).ready(function() {
 			$('span#invalid').removeClass('d-none').addClass('text-center').text(data.responseJSON.message);
 		})
 	});
-
-	if (localStorage.getItem('name') && window.location.pathname === '/dashboard') {
-		$('#username').text(localStorage.getItem('name'));
-	}
-
 	$('button#logout').click(function() {
 		$.ajax({
 			url: '/logout',
@@ -83,5 +97,4 @@ $(document).ready(function() {
 			alert('EXIT SUCCESS');
 		})
 	});
-
 });

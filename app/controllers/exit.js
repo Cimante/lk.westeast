@@ -11,8 +11,3 @@ const logout = (req, res) => {
 };
 
 module.exports = logout;
-
-/*
-	delete req.session.user;
-	res.redirect('/');
-*/
