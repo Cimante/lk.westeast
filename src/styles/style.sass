@@ -1,6 +1,9 @@
 @import "./node_modules/bootstrap/scss/bootstrap.scss"
 @import ui
 
+body 
+	font-family: 'Rubik', sans-serif !important
+
 .log-in 
 	display: flex
 	justify-content: center
@@ -34,7 +37,7 @@
 			font-weight: 700
 
 .dashboard
-	font-family: 'Source Sans Pro', sans-serif;
+	// font-family: 'Source Sans Pro', sans-serif
 	background-image: url(../../images/user_panel_bg.jpg)
 	height: 100vh
 	color: white
@@ -49,6 +52,11 @@
 		margin-top: 16px
 		.controls--exit
 			color: darken($yellow, 5%)
+
+	#addUser 
+		color: darken(white, 20%)
+		&:hover 
+			color: white
 
 	.navigate
 		background-color: black
@@ -71,6 +79,9 @@
 					&:hover
 						text-decoration: none
 						color: white
+				span.badge
+					font-size: 14px
+					line-height: 1.5
 
 	.far.fa-times-circle
 		font-size: 24px
@@ -139,7 +150,7 @@ span#invalid
 	background: url('../../images/bg_panel.jpg')
 	background-size: 100% 100%
 	background-repeat: no-repeat
-	font-family: 'Source Sans Pro', sans-serif;
+	// font-family: 'Source Sans Pro', sans-serif
 	font-weight: 400
 	color: white
 
@@ -158,3 +169,13 @@ span#invalid
 	justify-content: center
 	align-items: center
 	flex-direction: column
+
+.modal 
+	hr.separator 
+		border-top: 1px solid #bdbdbd
+		width: 96%
+
+#CreateNewUser 
+	.modal-content
+		max-height: 800px
+		overflow: scroll

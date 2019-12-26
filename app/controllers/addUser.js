@@ -8,6 +8,8 @@ const createUser = (req, res, next) => {
 	let tempData = JSON.parse(JSON.stringify(req.body));
 	let password = Math.random().toString(36).slice(-8);
 
+	console.log(tempData);
+
 	tempData.Password = bCrypt.hashSync(password);
 	tempData.Role = "user";
 
@@ -18,7 +20,7 @@ const createUser = (req, res, next) => {
 
 	sendPass(password, tempData.Email);
 
-	res.send(tempData.Email);
+	res.status(200).json({ email: tempData.Email });
 }
 
 module.exports = {

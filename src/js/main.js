@@ -1,4 +1,5 @@
 // здесь будем брать данные из полей форм, проверять их и стрелять поповерами
+
 function ReadUsers() {
 	$.ajax({
 		url: '/readusers',
@@ -9,7 +10,7 @@ function ReadUsers() {
 			$(document).ready(function() {
 				for (let user in users.response) {
 					$('tbody#contentTBody').append(`
-					<tr>
+					<tr class="animated fadeIn faster">
 					<td>${users.response[user].Office}</td>
 					<td>${users.response[user].LastName}</td>
 					<td>${users.response[user].FirstName}</td>
@@ -24,6 +25,29 @@ function ReadUsers() {
 	});
 };
 
+function getNewUserData() {
+	const data = {
+		LastName: $('#LastName').val(),
+		FirstName: $('#FirstName').val(),
+		MiddleName: $('#MiddleName').val(),
+		Office: $('#Office').val(),
+		Email: $('#Email').val(),
+		Phone: $('#Phone').val(),
+		FullCompanyName: $('#FullCompanyName').val(),
+		ShortCompanyName: $('#ShortCompanyName').val(),
+		Address: $('#Address').val(),
+		INN: $('#INN').val(),
+		KPP: $('#KPP').val(),
+		OGRN: $('#OGRN').val(),
+		OKPO: $('#OKPO').val(),
+		Bank: $('#Bank').val(),
+		BIK: $('#BIK').val(),
+		CorporateAcc: $('#CorporateAcc').val(),
+		PaymentAcc: $('#PaymentAcc').val()
+	}
+	return data;
+}
+
 window.onload = function() {
 	ReadUsers();
 }
@@ -37,37 +61,19 @@ $(document).ready(function() {
 			window.location.replace('/');
 		}
 	}
-	
-	$("button#sendNewUser").click(function(e) {
+
+	$('button#sendNewUser').click(function(e) {
 		e.preventDefault();
 
-		let data = {
-			LastName: $('#LastName').val(),
-			FirstName: $('#FirstName').val(),
-			MiddleName: $('#MiddleName').val(),
-			Office: $('#Office').val(),
-			Email: $('#Email').val(),
-			Phone: $('#Phone').val(),
-			FullCompanyName: $('#FullCompanyName').val(),
-			ShortCompanyName: $('#ShortCompanyName').val(),
-			Address: $('#Address').val(),
-			INN: $('#INN').val(),
-			KPP: $('#KPP').val(),
-			OGRN: $('#OGRN').val(),
-			OKPO: $('#OKPO').val(),
-			Bank: $('#Bank').val(),
-			BIK: $('#BIK').val(),
-			CorporateAcc: $('#CorporateAcc').val(),
-			PaymentAcc: $('#PaymentAcc').val()
-		}
+		const data = getNewUserData();
 
 		$.ajax({
 			url: '/add-user',
 			type: 'POST',
 			contentType: 'application/json',
-			data: JSON.stringify(data)
+			data: data
 		}).done(function(data) {
-			localStorage.setItem('new_email', data);
+			localStorage.setItem('new_email', data.email);
 			window.location.replace('/create-success');
 		});
 	});
@@ -97,6 +103,7 @@ $(document).ready(function() {
 			$('span#invalid').removeClass('d-none').addClass('text-center').text(data.responseJSON.message);
 		})
 	});
+
 	$('button#logout').click(function() {
 		$.ajax({
 			url: '/logout',
@@ -106,4 +113,17 @@ $(document).ready(function() {
 			alert('EXIT SUCCESS');
 		})
 	});
+
+	$('button[form="createNewUser--Form"]').click(function() {
+		const data = getNewUserData();
+
+		$.ajax({
+			url: '/add-user',
+			type: 'POST',
+			data: data,
+		}).done(function(data) {
+			alert(`Пользователь ${data.email} успешно добавлен!`);
+			window.location.reload();
+		})
+	})
 });

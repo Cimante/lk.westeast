@@ -11,12 +11,9 @@
 					br
 					a.badge.badge-pill.badge-danger#logout(href="/logout") Выйти
 				if (user.role === 'admin')
-					button.btn.btn-sm.btn-outline-success.nav-item.mr-4(type="button" data-toggle="modal" data-target="#exampleModal") 
+					button.btn.btn-outline-success#addUser.nav-item.mr-4(type="button" data-toggle="modal" data-target="#createNewUser") 
 						i.far.fa-user.mr-2
 						| Добавить пользователя
-					a.nav-item.d-flex.align-items-center.mr-4(href='/dashboard') 
-						i.far.fa-building.mr-2
-						| Добавить компанию
 		
 	section.container-fluid.animated.fadeIn.faster
 		.row
@@ -82,6 +79,9 @@
 							i.fas.fa-plus.mr-2
 							| Добавить заявку
 
+				h1 Клиенты и компании
+					
+
 				h1.mb-4#heading
 				table.table.table-dark.table-striped
 					thead
@@ -93,5 +93,4 @@
 							th(scope="col") Email
 					tbody#contentTBody
 						
-	include _add--user
-include scripts
+	include modals
