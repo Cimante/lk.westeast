@@ -9,7 +9,7 @@ function ReadUsers() {
 		}).done(function(users) {
 			$(document).ready(function() {
 				for (let user in users.response) {
-					$('tbody#contentTBody').append(`
+					$('tbody#content_0--body').append(`
 					<tr class="animated fadeIn faster">
 					<td>${users.response[user].Office}</td>
 					<td>${users.response[user].LastName}</td>
@@ -20,9 +20,7 @@ function ReadUsers() {
 					`);
 				}	
 			})
-		}).fail(function() {
-			alert('Караул, нихрена не получилось!');
-	});
+		});
 };
 
 function getNewUserData() {

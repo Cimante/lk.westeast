@@ -1,0 +1,37 @@
+.tabs>input 
+	display: none
+
+.tabs>div
+	display: none
+	padding: 12px
+	background: transparent
+	&:hover
+		transition: all .2s ease
+
+.tabs>label
+	display: inline-block
+	padding: 7px
+	margin: 0 -5px -1px 0
+	text-align: center
+	color: #666666
+	cursor: pointer
+
+.tabs
+	label
+		transition: all .1s ease-in-out
+		&:hover
+			color: darken(white, 30%)
+			transition: all .1s ease-in-out
+
+.tabs>input:checked + label
+	color: white
+	
+#tab_0:checked ~ #content_0,
+#tab_1:checked ~ #content_1,
+#tab_2:checked ~ #content_2,
+#tab_3:checked ~ #content_3,
+#tab_4:checked ~ #content_4,
+#tab_5:checked ~ #content_5,
+#tab_6:checked ~ #content_6,
+#tab_7:checked ~ #content_7
+	display: block

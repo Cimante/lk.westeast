@@ -1,0 +1,193 @@
+.tabs
+	if (user.role === 'admin')
+		input#tab_0(type="radio" name="inset" value="" checked)
+		label(for="tab_0") 
+			.mr-3
+				span Клиенты и компании
+
+	if (user.role === 'admin')
+		input#tab_1(type="radio" name="inset" value="")
+	else
+		input#tab_1(type="radio" name="inset" value="" checked)
+	label(for="tab_1")
+		.d-flex.align-items-center.justify-content-between.mr-3
+			span Заявки на звонок
+			//- span.badge.badge-light.ml-2 0
+
+	input#tab_2(type="radio" name="inset" value="")
+	label(for="tab_2")
+		.d-flex.align-items-center.justify-content-between.mr-3
+			span Пропуск ВНОС/ВЫНОС
+			//- span.badge.badge-light.ml-2 0
+			
+	input#tab_3(type="radio" name="inset" value="")
+	label(for="tab_3")
+		.d-flex.align-items-center.justify-content-between.mr-3
+			span ПОРЧА/УТРАТА карт
+			//- span.badge.badge-light.ml-2 0
+
+	input#tab_4(type="radio" name="inset" value="")
+	label(for="tab_4")
+		.d-flex.align-items-center.justify-content-between.mr-3
+			span Заказ документов
+			//- span.badge.badge-light.ml-2 0
+	
+	input#tab_5(type="radio" name="inset" value="")
+	label(for="tab_5")
+		.d-flex.align-items-center.justify-content-between.mr-3
+			span Пропуски на авто
+			//- span.badge.badge-light.ml-2 0
+	
+	input#tab_6(type="radio" name="inset" value="")
+	label(for="tab_6")
+		.d-flex.align-items-center.justify-content-between.mr-3
+			span Пропуски на персону
+			//- span.badge.badge-light.ml-2 0
+	
+	input#tab_7(type="radio" name="inset" value="")
+	label(for="tab_7")
+		.d-flex.align-items-center.justify-content-between.mr-3
+			span Заявки на работы
+			//- span.badge.badge-light.ml-2 0
+
+	//- --------------------------------------------------------------
+
+	#content_0.animated.fadeIn.faster
+		h1.my-5.mr-5#heading Клиенты и компании
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Фамилия
+					th(scope="col") Имя
+					th(scope="col") Отчество
+					th(scope="col") Email
+			tbody#content_0--body
+
+	#content_1.animated.fadeIn.faster
+		.d-flex.justify-content-start.align-items-center
+			h1.my-5.mr-5#heading Заявки на звонок
+
+			button.btn.btn-dark.mt-1.ml-5
+				i.fas.fa-plus.mr-2
+				| Добавить заявку
+
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Дата
+					th(scope="col") Время
+					th(scope="col") Статус
+			tbody#content_1--body
+
+	#content_2.animated.fadeIn.faster
+		.d-flex.justify-content-start.align-items-center
+			h1.my-5.mr-5#heading Пропуск ВНОС/ВЫНОС
+
+			button.btn.btn-dark.mt-1.ml-5
+				i.fas.fa-plus.mr-2
+				| Добавить заявку
+
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Дата
+					th(scope="col") Время с-до
+					th(scope="col") Материальные ценности
+					th(scope="col") Кол-во
+					th(scope="col") Авто 
+					th(scope="col") Представитель арендатора 
+					th(scope="col") Статус
+			tbody#content_2--body
+
+	#content_3.animated.fadeIn.faster
+		.d-flex.justify-content-start.align-items-center
+			h1.my-5.mr-5#heading ПОРЧА/УТРАТА карт
+
+			button.btn.btn-dark.mt-1.ml-5
+				i.fas.fa-plus.mr-2
+				| Добавить заявку
+
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Номер карты
+					th(scope="col") Зарегистрирована на имя
+					th(scope="col") Название компании
+					th(scope="col") Статус
+			tbody#content_3--body
+
+	#content_4.animated.fadeIn.faster
+		.d-flex.justify-content-start.align-items-center
+			h1.my-5.mr-5#heading Заказ документов
+
+			button.btn.btn-dark.mt-1.ml-5
+				i.fas.fa-plus.mr-2
+				| Добавить заявку
+
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Дата
+					th(scope="col") Вид документа
+					th(scope="col") Статус
+			tbody#content_4--body
+
+	#content_5.animated.fadeIn.faster
+		.d-flex.justify-content-start.align-items-center
+			h1.my-5.mr-5#heading Пропуски на авто
+
+			button.btn.btn-dark.mt-1.ml-5
+				i.fas.fa-plus.mr-2
+				| Добавить заявку
+
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Дата
+					th(scope="col") Марка авто
+					th(scope="col") Гос. номер
+					th(scope="col") Статус
+			tbody#content_5--body
+
+	#content_6.animated.fadeIn.faster
+		.d-flex.justify-content-start.align-items-center
+			h1.my-5.mr-5#heading Пропуски на персону
+
+			button.btn.btn-dark.mt-1.ml-5
+				i.fas.fa-plus.mr-2
+				| Добавить заявку
+
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Дата
+					th(scope="col") Серия/№ паспорта
+					th(scope="col") Фамилия/имя
+					th(scope="col") Статус
+			tbody#content_6--body
+
+	#content_7.animated.fadeIn.faster
+		.d-flex.justify-content-start.align-items-center
+			h1.my-5.mr-5#heading Заявки на работы
+
+			button.btn.btn-dark.mt-1.ml-5
+				i.fas.fa-plus.mr-2
+				| Добавить заявку
+
+		table.table.table-dark.table-striped
+			thead
+				tr
+					th(scope="col") Номер офиса
+					th(scope="col") Дата
+					th(scope="col") Ответственный
+					th(scope="col") Телефон
+					th(scope="col") Вид работ
+					th(scope="col") Статус
+			tbody#content_7--body
