@@ -126,7 +126,7 @@ span#invalid
 	border-radius: 2px
 
 .dark-field
-	input 
+	input, textarea
 		border: 1px solid darken($dark, 10%)
 		background-color: $dark !important
 		color: white
@@ -142,6 +142,8 @@ span#invalid
 		i 
 			color: darken(white, 20%)
 			font-weight: 700
+	textarea
+		resize: none
 
 .bg
 	position: absolute
@@ -179,3 +181,14 @@ span#invalid
 	.modal-content
 		max-height: 800px
 		overflow: scroll
+
+aside.nav.nav-pills
+	a 
+		color: darken(white, 40%)
+		transition: all .1s ease-in-out
+		&:hover
+			color: darken(white, 15%)
+			transition: all .1s ease-in-out
+
+	.nav-link.active
+		background-color: #5A6169

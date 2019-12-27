@@ -1,0 +1,160 @@
+//- Заменить названия one, two... на названия вкладок
+.row
+	.col-2
+		aside.nav.flex-column.nav-pills#v-pills-tab.mt-2(role="tablist" aria-orientation="vertical")
+			if (user.role === 'admin')
+				a.nav-link.active#v-pills-one-tab(data-toggle="pill" href="#v-pills-one" role="tab" aria-controls="v-pills-one" aria-selected="true") Клиенты и компании
+				a.nav-link#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявки на звонок
+			else
+				a.nav-link.active#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявки на звонок
+
+			a.nav-link#create-pass-decl-tab(data-toggle="pill" data-query="Passports" href="#create-pass-decl" role="tab" aria-controls="create-pass-decl" aria-selected="false") Пропуск ВНОС/ВЫНОС
+			a.nav-link#create-losscard-decl-tab(data-toggle="pill" data-query="LossCards" href="#create-losscard-decl" role="tab" aria-controls="create-losscard-decl" aria-selected="false") ПОРЧА/УТРАТА карт
+			a.nav-link#create-docsorder-decl-tab(data-toggle="pill" data-query="DocsOrders" href="#create-docsorder-decl" role="tab" aria-controls="create-docsorder-decl" aria-selected="false") Заказ документов
+			a.nav-link#create-carpass-decl-tab(data-toggle="pill" data-query="PassCars" href="#create-carpass-decl" role="tab" aria-controls="create-carpass-decl" aria-selected="false") Пропуски на авто
+			a.nav-link#create-personpass-decl-tab(data-toggle="pill" href="#create-personpass-decl" role="tab" aria-controls="create-personpass-decl" aria-selected="false") Пропуски на персону
+			a.nav-link#create-works-decl-tab(data-toggle="pill" data-query="WorkersOrders" href="#create-works-decl" role="tab" aria-controls="create-works-decl" aria-selected="false") Заявки на работы
+	.col-10
+		.tab-content#v-pills-tabContent
+			if (user.role === 'admin')
+				.tab-pane.fade.show.active#v-pills-one(role="tabpanel" aria-labelledby="v-pills-one-tab")
+					h1.mb-5.mr-5#heading Клиенты и компании
+					#content_0--heading
+						table.table.table-dark.table-striped
+							thead
+								tr
+									th(scope="col") Номер офиса
+									th(scope="col") Фамилия
+									th(scope="col") Имя
+									th(scope="col") Отчество
+									th(scope="col") Email
+							tbody#content_0--body
+
+				.tab-pane.fade#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
+					.d-flex.justify-content-start.align-items-start
+						h1.mb-5.mr-5#heading Заявки на звонок
+						button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-call-decl")
+							i.fas.fa-plus.mr-2
+							| Добавить заявку
+					table.table.table-dark.table-striped
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Дата
+								th(scope="col") Время
+								th(scope="col") Статус
+						tbody#create-call-decl--body
+			else 
+				.tab-pane.fade.show.active#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
+					.d-flex.justify-content-start.align-items-start
+						h1.mb-5.mr-5#heading Заявки на звонок
+						button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-call-decl")
+							i.fas.fa-plus.mr-2
+							| Добавить заявку
+					table.table.table-dark.table-striped
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Дата
+								th(scope="col") Время
+								th(scope="col") Статус
+						tbody#content_1--body
+
+			.tab-pane.fade#create-pass-decl(role="tabpanel" aria-labelledby="create-pass-decl-tab")
+				.d-flex.justify-content-start.align-items-start
+					h1.mb-5.mr-5#heading Пропуск ВНОС/ВЫНОС
+					button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-pass-decl")
+						i.fas.fa-plus.mr-2
+						| Добавить заявку
+				table.table.table-dark.table-striped
+					thead
+						tr
+							th(scope="col") Номер офиса
+							th(scope="col") Дата
+							th(scope="col") Время с-до
+							th(scope="col") Материальные ценности
+							th(scope="col") Кол-во
+							th(scope="col") Авто 
+							th(scope="col") Представитель арендатора 
+							th(scope="col") Статус
+					tbody#create-pass-decl--body
+			
+			.tab-pane.fade#create-losscard-decl(role="tabpanel" aria-labelledby="create-losscard-decl-tab")
+				.d-flex.justify-content-start.align-items-start
+					h1.mb-5.mr-5#heading ПОРЧА/УТРАТА карт
+					button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-losscard-decl")
+						i.fas.fa-plus.mr-2
+						| Добавить заявку
+				table.table.table-dark.table-striped
+					thead
+						tr
+							th(scope="col") Номер офиса
+							th(scope="col") Номер карты
+							th(scope="col") Зарегистрирована на имя
+							th(scope="col") Название компании
+							th(scope="col") Статус
+					tbody#create-losscard-decl--body
+
+			.tab-pane.fade#create-docsorder-decl(role="tabpanel" aria-labelledby="create-docsorder-decl-tab")
+				.d-flex.justify-content-start.align-items-start
+					h1.mb-5.mr-5#heading Заказ документов
+					button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-docsorder-decl")
+						i.fas.fa-plus.mr-2
+						| Добавить заявку
+				table.table.table-dark.table-striped
+					thead
+						tr
+							th(scope="col") Номер офиса
+							th(scope="col") Дата
+							th(scope="col") Вид документа
+							th(scope="col") Статус
+					tbody#create-docsorder-decl--body
+
+			.tab-pane.fade#create-carpass-decl(role="tabpanel" aria-labelledby="create-carpass-decl-tab")
+				.d-flex.justify-content-start.align-items-start
+					h1.mb-5.mr-5#heading Пропуски на авто
+					button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-carpass-decl")
+						i.fas.fa-plus.mr-2
+						| Добавить заявку
+				table.table.table-dark.table-striped
+					thead
+						tr
+							th(scope="col") Номер офиса
+							th(scope="col") Дата
+							th(scope="col") Марка авто
+							th(scope="col") Гос. номер
+							th(scope="col") Статус
+					tbody#create-carpass-decl--body
+
+			.tab-pane.fade#create-personpass-decl(role="tabpanel" aria-labelledby="create-personpass-decl-tab")
+				.d-flex.justify-content-start.align-items-start
+					h1.mb-5.mr-5#heading Пропуски на персону
+					button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-personpass-decl")
+						i.fas.fa-plus.mr-2
+						| Добавить заявку
+				table.table.table-dark.table-striped
+					thead
+						tr
+							th(scope="col") Номер офиса
+							th(scope="col") Дата
+							th(scope="col") Серия/№ паспорта
+							th(scope="col") Фамилия/имя
+							th(scope="col") Статус
+					tbody#create-personpass-decl--body
+
+			.tab-pane.fade#create-works-decl(role="tabpanel" aria-labelledby="create-works-decl-tab")
+				.d-flex.justify-content-start.align-items-start
+					h1.mb-5.mr-5#heading Заявки на работы
+					button.btn.btn-dark.mt-1.ml-5(data-toggle="modal" data-target="#create-works-decl")
+						i.fas.fa-plus.mr-2
+						| Добавить заявку
+				table.table.table-dark.table-striped
+					thead
+						tr
+							th(scope="col") Номер офиса
+							th(scope="col") Дата
+							th(scope="col") Ответственный
+							th(scope="col") Телефон
+							th(scope="col") Вид работ
+							th(scope="col") Статус
+					tbody#create-works-decl--body

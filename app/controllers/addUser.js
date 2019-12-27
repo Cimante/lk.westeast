@@ -5,7 +5,7 @@ const sendPass = require('./sendPass');
 const newUser = mongoose.model('User');
 
 const createUser = (req, res, next) => {
-	let tempData = JSON.parse(JSON.stringify(req.body));
+	let tempData = req.body;
 	let password = Math.random().toString(36).slice(-8);
 
 	console.log(tempData);

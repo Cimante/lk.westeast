@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const User = mongoose.model('User');
 
 const UsersList = (req, res) => {
@@ -15,7 +14,6 @@ const UsersList = (req, res) => {
 			res.json({ response: userMap });
 		});
 	}
-	
 }
 
 module.exports = { UsersList };

@@ -1,4 +1,6 @@
 //- Modal
+//- Добавить атрибут required для полей
+
 if (user.role === 'admin')
 	#createNewUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby='CreateNewUser', aria-hidden='true')
 		.modal-dialog.modal-dialog-centered.modal-lg(role='document')
@@ -74,9 +76,233 @@ if (user.role === 'admin')
 								label.my-0.mb-2(for="PaymentAcc") Расчётный счёт
 								input.form-control#PaymentAcc(type="text" name="PaymentAcc" require)
 						
-					
 				.modal-footer
 					button.btn.btn-dark(type='button', data-dismiss='modal') Закрыть
 					button.btn.btn-success(type='button' form="createNewUser--Form") 
 						i.fas.fa-user-plus.mr-2
 						| Добавить
+
+.modal.fade#create-call-decl(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-call-decl--title Добавление заявки на звонок
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-call-decl--Form(action="#" method="POST")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-4
+							label(for="create-call-decl--Office") Номер офиса
+							input.form-control#create-call-decl--Office(type="text" name="Office")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-6
+							label(for="create-call-decl--Date") Дата
+							input.form-control#create-call-decl--Date(type="date" name="Date")
+						.col-6
+							label(for="create-call-decl--Time") Время
+							input.form-control#create-call-decl--Time(type="time" name="Time")
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-call-decl--Form") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку
+
+.modal.fade#create-pass-decl(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-pass-decl--title Добавление заявки
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-call-decl--Form(action="#" method="POST")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-4
+							label(for="create-pass-decl--Office") Номер офиса
+							input.form-control#create-pass-decl--Office(type="text" name="Office")
+						.col-8
+							label(for="create-pass-decl--Date") Дата
+							input.form-control#create-pass-decl--Date(type="date" name="Date")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-6 
+							label(for="create-pass-decl--Start-Time") Время начала
+							input.form-control#create-pass-decl--Start-Time(type="time" name="Starttime")
+						.col-6
+							label(for="create-pass-decl--End-Time") Время конца
+							input.form-control#create-pass-decl--End-Time(type="time" name="Endtime")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-pass-decl--Wealth") Материальные ценности
+							textarea.form-control#create-pass-decl--Wealth(rows="4" name="Wealth")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-3
+							label(for="create-pass-decl--Quantity") Кол-во
+							input.form-control#create-pass-decl--Quantity(type="number" name="Quantity" min="1" max="10000")
+						.col-9
+							label(for="create-pass-decl--Car") Авто
+							input.form-control#create-pass-decl--Car(type="text" name="Car")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-pass-decl--TenantRepres") Представитель арендатора
+							input.form-control#create-pass-decl--TenantRepres(type="text" name="TenantRepres")
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-pass-decl--Form") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку
+
+.modal.fade#create-losscard-decl(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-losscard-decl--title Добавление заявки о порче/утрате карты
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-losscard-decl--Form(action="#" method="POST")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-4
+							label(for="create-losscard-decl--Office") Номер офиса
+							input.form-control#create-losscard-decl--Office(type="text" name="Office")
+						.col-8
+							label(for="create-losscard-decl--CardID") Номер карты
+							input.form-control#create-losscard-decl--CardID(type="text" name="CardID")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-losscard-decl--RegisteredIn") Зарегистрирована на Имя
+							input.form-control#create-losscard-decl--RegisteredIn(type="text" name="RegisteredIn")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-losscard-decl--CompanyName") Название компании
+							input.form-control#create-losscard-decl--CompanyName(type="text" name="CompanyName")
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-losscard-decl--Form") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку
+
+.modal.fade#create-docsorder-decl(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-docsorder-decl--title Добавление заявки
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-docsorder-decl--Form(action="#" method="POST")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-4
+							label(for="create-docsorder-decl--Office") Номер офиса
+							input.form-control#create-docsorder-decl--Office(type="text" name="Office")
+						.col-8
+							label(for="create-docsorder-decl--Date") Дата
+							input.form-control#create-docsorder-decl--Date(type="date" name="Date")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-docsorder-decl--Doctype") Вид документа
+							input.form-control#create-docsorder-decl--Doctype(type="text" name="Doctype")
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-docsorder-decl--Form") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку
+
+.modal.fade#create-carpass-decl(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-carpass-decl--title Добавление заявки
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-carpass-decl--Form(action="#" method="POST")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-4
+							label(for="create-carpass-decl--Office") Номер офиса
+							input.form-control#create-carpass-decl--Office(type="text" name="Office")
+						.col-8
+							label(for="create-carpass-decl--Date") Дата
+							input.form-control#create-carpass-decl--Date(type="date" name="Date")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-6
+							label(for="create-carpass-decl--Car-brand") Марка авто
+							input.form-control#create-carpass-decl--Car-brand(type="text" name="CarBrand")
+						.col-6
+							label(for="create-carpass-decl--Gov-Num") Гос. номер
+							input.form-control#create-carpass-decl--Gov-Num(type="text" name="GovermentNumber")
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-carpass-decl--Form") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку
+							
+.modal.fade#create-personpass-decl(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-carpass-decl--title Добавление заявки
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-personpass-decl--Form(action="#" method="POST")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-4
+							label(for="create-personpass-decl--Office") Номер офиса
+							input.form-control#create-personpass-decl--Office(type="text" name="Office")
+						.col-8
+							label(for="create-personpass-decl--Date") Дата
+							input.form-control#create-personpass-decl--Date(type="date" name="Date")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12 
+							label(for="create-personpass-decl--Passport") Серия и номер паспорта
+							input.form-control#create-personpass-decl--Passport(type="text" name="Passport")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12 
+							label(for="create-personpass-decl--Full-name") Имя и фамилия
+							input.form-control#create-personpass-decl--Full-name(type="text" name="FullName")
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-personpass-decl--Form") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку
+
+.modal.fade#create-works-decl(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-works-decl--title Добавление заявки
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-works-decl--Form(action="#" method="POST")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-4
+							label(for="create-works-decl--Office") Номер офиса
+							input.form-control#create-works-decl--Office(type="text" name="Office")
+						.col-8
+							label(for="create-works-decl--Date") Дата
+							input.form-control#create-works-decl--Date(type="date" name="Date")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12 
+							label(for="create-works-decl--Responsible") Ответственный
+							input.form-control#create-works-decl--Responsible(type="text" name="Responsible")
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-6
+							label(for="create-works-decl--Phone") Телефон
+							input.form-control#create-works-decl--Phone(type="text" name="Phone")
+						.col-6
+							label(for="create-works-decl--Worktype") Вид работ
+							input.form-control#create-works-decl--Worktype(type="text" name="Worktype")
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-works-decl--Form") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку

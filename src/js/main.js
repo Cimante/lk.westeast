@@ -1,8 +1,12 @@
 // здесь будем брать данные из полей форм, проверять их и стрелять поповерами
 
+// TODO: Завести на клик по элементу навигации функцию с POST-запросом. 
+// 		 В ответе массив объектов. Если admin, то возвращать массив ото всех пользователей.
+//		 Если user, то только свои заявки
+
 function ReadUsers() {
 	$.ajax({
-		url: '/readusers',
+		url: '/read-users',
 		type: 'POST',
 		contentType: 'application/json',
 		data: ''
@@ -22,6 +26,32 @@ function ReadUsers() {
 			})
 		});
 };
+
+/**
+ * @desc Чтение записей из БД по названию массива внутри пользователя 
+ * @param {String} Arr название массива
+ * @param {String} Selector селектор тела таблицы
+ */
+function ReadData(Arr, Selector) {
+	$.ajax({
+		url: '/read-data',
+		type: 'POST',
+		contentType: 'application/json',
+		data: JSON.stringify({Arr: Arr})
+	}).done(function(data) {
+		$(document).ready(function() {
+			for (let item in data) {
+				for (let item_0 in data[item]) {
+					$(`tbody${Selector}--body`).html(`
+					<tr class="animated fadeIn faster">
+					<td>${data[item][item_0].Office}</td>
+					`);
+					// TODO: дописать для всех случаев и унифицировать
+				}
+			}
+		})
+	})
+}
 
 function getNewUserData() {
 	const data = {
@@ -62,14 +92,11 @@ $(document).ready(function() {
 
 	$('button#sendNewUser').click(function(e) {
 		e.preventDefault();
-
-		const data = getNewUserData();
-
 		$.ajax({
 			url: '/add-user',
 			type: 'POST',
 			contentType: 'application/json',
-			data: data
+			data: JSON.stringify(getNewUserData())
 		}).done(function(data) {
 			localStorage.setItem('new_email', data.email);
 			window.location.replace('/create-success');
@@ -123,5 +150,28 @@ $(document).ready(function() {
 			alert(`Пользователь ${data.email} успешно добавлен!`);
 			window.location.reload();
 		})
+	});
+
+	$('button[form="create-call-decl--Form"]').click(function() {
+		const data = {
+			Office: $('input#create-call-decl--Office').val(),
+			Date: $('input#create-call-decl--Date').val(),
+			Timestamp: $('input#create-call-decl--Time').val()
+		};
+
+		$.ajax({
+			url:'/insert-data',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(data)
+		}).done(function(data) {
+			alert('Заявка успешно добавлена!');
+			window.location.reload();
+		});
+	});
+
+	$('a[data-query]').click(function() {
+		console.log($(this).data('query'), $(this).attr('href'));
+		ReadData($(this).data('query'), $(this).attr('href'));
 	})
 });

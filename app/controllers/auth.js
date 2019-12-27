@@ -16,9 +16,11 @@ const signIn = (req, res) => {
 			const isValid = bCrypt.compareSync(password, user.Password);
 
 			if (isValid) {
+				req.session.userID = user._id;
 				req.session.email = user.Email;
+				req.session.office = user.Office;
 				req.session.name = user.FirstName;
-				req.session.role = user.Role
+				req.session.role = user.Role;
 
 				res.status(200).json({ ok: true });
 				
