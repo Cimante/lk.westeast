@@ -104,7 +104,7 @@ if (user.role === 'admin')
 							input.form-control#create-call-decl--Time(type="time" name="Time")
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
-				button.btn.btn-success(type='button' form="create-call-decl--Form") 
+				button.btn.btn-success(type='button' form="create-call-decl--Form" data-storage="Calls") 
 					i.fas.fa-plus.mr-2
 					| Добавить заявку
 
@@ -149,7 +149,7 @@ if (user.role === 'admin')
 							input.form-control#create-pass-decl--TenantRepres(type="text" name="TenantRepres")
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
-				button.btn.btn-success(type='button' form="create-pass-decl--Form") 
+				button.btn.btn-success(type='button' form="create-pass-decl--Form" data-storage="Passports") 
 					i.fas.fa-plus.mr-2
 					| Добавить заявку
 
@@ -180,7 +180,7 @@ if (user.role === 'admin')
 							input.form-control#create-losscard-decl--CompanyName(type="text" name="CompanyName")
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
-				button.btn.btn-success(type='button' form="create-losscard-decl--Form") 
+				button.btn.btn-success(type='button' form="create-losscard-decl--Form" data-storage="LossCards") 
 					i.fas.fa-plus.mr-2
 					| Добавить заявку
 
@@ -207,7 +207,7 @@ if (user.role === 'admin')
 							input.form-control#create-docsorder-decl--Doctype(type="text" name="Doctype")
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
-				button.btn.btn-success(type='button' form="create-docsorder-decl--Form") 
+				button.btn.btn-success(type='button' form="create-docsorder-decl--Form" data-storage="DocsOrders") 
 					i.fas.fa-plus.mr-2
 					| Добавить заявку
 
@@ -237,7 +237,7 @@ if (user.role === 'admin')
 							input.form-control#create-carpass-decl--Gov-Num(type="text" name="GovermentNumber")
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
-				button.btn.btn-success(type='button' form="create-carpass-decl--Form") 
+				button.btn.btn-success(type='button' form="create-carpass-decl--Form" data-storage="PassCars") 
 					i.fas.fa-plus.mr-2
 					| Добавить заявку
 							
@@ -302,6 +302,6 @@ if (user.role === 'admin')
 							input.form-control#create-works-decl--Worktype(type="text" name="Worktype")
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
-				button.btn.btn-success(type='button' form="create-works-decl--Form") 
+				button.btn.btn-success(type='button' form="create-works-decl--Form" data-storage="WorkersOrders") 
 					i.fas.fa-plus.mr-2
 					| Добавить заявку

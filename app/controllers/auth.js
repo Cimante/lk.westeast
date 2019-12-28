@@ -22,7 +22,7 @@ const signIn = (req, res) => {
 				req.session.name = user.FirstName;
 				req.session.role = user.Role;
 
-				res.status(200).json({ ok: true });
+				res.status(200).json({ office: req.session.office, role: req.session.role, ok: true });
 				
 			} else {
 				res.status(401).json({ message: 'Неверная пара email / пароль' });

@@ -40,18 +40,21 @@ function ReadData(Arr, Selector) {
 		data: JSON.stringify({Arr: Arr})
 	}).done(function(data) {
 		$(document).ready(function() {
-			for (let item in data) {
-				for (let item_0 in data[item]) {
-					$(`tbody${Selector}--body`).html(`
-					<tr class="animated fadeIn faster">
-					<td>${data[item][item_0].Office}</td>
-					`);
-					// TODO: дописать для всех случаев и унифицировать
+			var htmlString = "";
+			for (let item in data.response) {
+				htmlString += `<tr class="animated fadeIn faster">`;
+				for(let item_0 in data.response[item]) {
+					if (item_0 === "_id") continue;
+					htmlString += `<td>${data.response[item][item_0]}</td>`
 				}
+				htmlString += `</tr>`;
 			}
-		})
-	})
+			console.log(htmlString);
+			$(`tbody${Selector}--body`).html(htmlString);
+		});
+	});
 }
+				
 
 function getNewUserData() {
 	const data = {
@@ -77,6 +80,9 @@ function getNewUserData() {
 }
 
 window.onload = function() {
+	// Искать тэг a с классами nav-item active
+	// Если у найденного тэга id #v-pills-one-tab, то ReadUsers();
+	// Иначе брать data-query этот тэга и в ReadData();
 	ReadUsers();
 }
 
@@ -152,26 +158,35 @@ $(document).ready(function() {
 		})
 	});
 
-	$('button[form="create-call-decl--Form"]').click(function() {
-		const data = {
-			Office: $('input#create-call-decl--Office').val(),
-			Date: $('input#create-call-decl--Date').val(),
-			Timestamp: $('input#create-call-decl--Time').val()
-		};
+	$('a[data-query]').click(function() {
+		console.log($(this).data('query'), $(this).attr('href'));
+		ReadData($(this).data('query'), $(this).attr('href'));
+	});
+
+	// ===============================================================
+
+	$('button[form]').click(function(e) {
+		e.preventDefault();
+
+		let inputs = $(`form#${ $(this).attr('form') }`).find('input');
+		let storage = {};
+		storage.ArrayName = $(this).data('storage');
+
+		$.each(inputs, function(key, value) {
+			storage[value.name] = value.value;
+		});
 
 		$.ajax({
 			url:'/insert-data',
 			type: 'POST',
 			contentType: 'application/json',
-			data: JSON.stringify(data)
+			data: JSON.stringify(storage)
 		}).done(function(data) {
 			alert('Заявка успешно добавлена!');
 			window.location.reload();
-		});
-	});
-
-	$('a[data-query]').click(function() {
-		console.log($(this).data('query'), $(this).attr('href'));
-		ReadData($(this).data('query'), $(this).attr('href'));
+		}).fail(function(data) {
+			alert('Всё летит в пизду');
+			// в случае фэйла возвращать массив некорректных полей. вызывать invalid для них
+		})
 	})
 });
