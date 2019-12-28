@@ -1,67 +1,67 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-	FirstName: String,
-	LastName: String,
-	MiddleName: String,
-	Office: String,
-	Email: String,
-	Password: String,
-	Phone: String,
-	Role: String,
-	FullCompanyName: String,
-	ShortCompanyName: String,
-	Address: String,
-	INN: String,
-	KPP: String,
-	OGRN: String,
-	Bank: String,
-	BIK: String,
-	CorporateAcc: String,
-	PaymentAcc: String,
+	FirstName			: { type: String, require: true },
+	LastName			: { type: String, require: true },
+	MiddleName			: { type: String, require: true },
+	Office				: { type: String, require: true },
+	Email				: { type: String, require: true, unique: true },
+	Password			: { type: String, require: true },
+	Phone				: { type: String, require: true },
+	Role				: { type: String, require: true },
+	FullCompanyName		: { type: String, require: true },
+	ShortCompanyName	: { type: String, require: true },
+	Address				: { type: String, require: true },
+	INN					: { type: String, require: true, unique: true },
+	KPP					: { type: String, require: true, unique: true },
+	OGRN				: { type: String, require: true, unique: true },
+	Bank				: { type: String, require: true },
+	BIK					: { type: String, require: true, unique: true },
+	CorporateAcc		: { type: String, require: true },
+	PaymentAcc			: { type: String, require: true },
 	Calls: [{
-		Office: String,
-		Date: Date,
-		Timestamp: String,
-		Status: String
+		Office			: { type: String, require: true },
+		Date			: { type: Date, require: true, default: new Date() },
+		Timestamp		: { type: String, require: true },
+		Status			: { type: String, require: true, default: 'Отправлено' },
 	}],
 	Passports: [{
-		Office: String,
-		Date: Date,
-		TimeFromTo: String,
-		MaterialValues: String,
-		Quantity: Number,
-		Car: String,
-		TenantRepres: String,
-		Status: String
+		Office 			: { type: String, require: true },
+		Date			: { type: Date, require: true, default: new Date() },
+		TimeFromTo		: { type: String, require: true },
+		MaterialValues	: { type: String, require: false },
+		Quantity		: { type: Number, require: true, default: 1 },
+		Car				: { type: String, require: true },
+		TenantRepres	: { type: String, require: true },
+		Status	 		: { type: String, require: true, default: 'Отправлено' }
 	}],
 	LossCards: [{
-		Office: String,
-		CardNumber: String,
-		RegisteredIn: String,
-		CompanyName: String,
-		Status: String
+		Office 			: { type: String, require: true },
+		CardNumber		: { type: String, require: true },
+		RegisteredIn 	: { type: String, require: true },
+		CompanyName 	: { type: String, require: true },
+		Status			: { type: String, require: true, default: 'Отправлено' }
 	}],
 	DocsOrders: [{
-		Office: String,
-		Date: Date,
-		Doctype: String,
-		Status: String
+		Office 			: { type: String, require: true },
+		Date			: { type: Date, require: true, default: new Date() },
+		Doctype			: { type: String, require: true },
+		Status			: { type: String, require: true, default: 'Отправлено' }
 	}],
 	PassCars: [{
-		Office: String,
-		Date: Date,
-		CarBrand: String,
-		GovermentNumber: String,
-		Status: String
+		Office			: { type: String, require: true },
+		Date			: { type: Date, require: true, default: new Date() },
+		CarBrand		: { type: String, require: true },
+		GovermentNumber : { type: String, require: true },
+		Status			: { type: String, require: true, default: 'Отправлено' }
 	}],
 	WorkersOrders: [{
-		Office: String,
-		Date: Date,
-		Responsible: String,
-		Phone: String,
-		Worktype: String,
-		Status: String
+		Office 			: { type: String, require: true },
+		Date			: { type: Date, require: true, default: new Date() },
+		Responsible		: { type: String, require: true },
+		Phone			: { type: String, require: true },
+		Worktype		: { type: String, require: true },
+		Status			: { type: String, require: true, default: 'Отправлено' }
 	}]
 });
 
