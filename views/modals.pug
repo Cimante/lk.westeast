@@ -305,3 +305,84 @@ if (user.role === 'admin')
 				button.btn.btn-success(type='button' form="create-works-decl--Form" data-storage="WorkersOrders") 
 					i.fas.fa-plus.mr-2
 					| Добавить заявку
+
+if (user.role === 'admin')
+	#updateUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby="UpdateUser", aria-hidden='true')
+		.modal-dialog.modal-dialog-centered.modal-lg(role='document')
+			.modal-content
+				.modal-header
+					h5.modal-title Редактирование пользовательских данных
+					button.close#updateUser--Close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true') 
+							i.far.fa-times-circle
+				.modal-body
+					form#updateUser--Form
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-4
+								label.my-0.mb-2(for="LastName") Фамилия
+								input.form-control.col-12#LastName(type="text" name="LastName" required disabled)
+							.col-4
+								label.my-0.mb-2(for="FirstName") Имя
+								input.form-control#FirstName(type="text" name="FirstName" required disabled)
+							.col-4
+								label.my-0.mb-2(for="MiddleName") Отчество
+								input.form-control#MiddleName(type="text" name="MiddleName" required disabled)
+							
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-2
+								label.my-0.mb-2(for="Office") № офиса
+								input.form-control#Office(type="text" name="Office" required disabled)
+							.col-5
+								label.my-0.mb-2(for="Email") Email
+								input.form-control#Email(type="email" name="Email" required disabled)
+							.col-5
+								label.my-0.mb-2(for="Phone") Телефон
+								input.form-control#Phone(type="tel" name="Phone" required disabled)
+						.row
+							hr.separator
+						
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-7
+								label.my-0.mb-2(for="FullCompanyName") Полное название компании
+								input.form-control#FullCompanyName(type="text" name="FullCompanyName" required disabled)
+							.col-5
+								label.my-0.mb-2(for="ShortCompanyName") Краткое название компании
+								input.form-control#ShortCompanyName(type="text" name="ShortCompanyName" required disabled)
+
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-12
+								label.my-0.mb-2(for="Address") Юридический адрес
+								input.form-control#Address(type="text" name="Address" required disabled)
+
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-4
+								label.my-0.mb-2(for="INN") ИНН
+								input.form-control#INN(type="text" name="INN" required disabled)
+							.col-4
+								label.my-0.mb-2(for="KPP") КПП
+								input.form-control#KPP(type="text" name="KPP" required disabled)
+							.col-4
+								label.my-0.mb-2(for="OGRN") ОГРН
+								input.form-control#OGRN(type="text" name="OGRN" required disabled)
+
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-7
+								label.my-0.mb-2(for="Bank") Банк
+								input.form-control#Bank(type="text" name="Bank" required disabled)
+							.col-5
+								label.my-0.mb-2(for="BIK") БИК
+								input.form-control#BIK(type="text" name="BIK" required disabled)
+
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-6
+								label.my-0.mb-2(for="CorporateAcc") Корпоративный счёт
+								input.form-control#CorporateAcc(type="text" name="CorporateAcc" required disabled)
+							.col-6
+								label.my-0.mb-2(for="PaymentAcc") Расчётный счёт
+								input.form-control#PaymentAcc(type="text" name="PaymentAcc" required disabled)
+						
+				.modal-footer
+					button.btn.btn-dark#updateUser--Close(type='button', data-dismiss='modal') Закрыть
+					button.btn.btn-success(type='button' form="updateUser--Form") 
+						i.fas.fa-sync-alt.mr-2
+						| Обновить

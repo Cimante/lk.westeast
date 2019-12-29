@@ -7,30 +7,63 @@ const User = mongoose.model('User');
 	ArrayName - имя массива в модели User;
 	Office - номер офиса. Для админа служит поисковым запросом среди записей. 
 	Пользователи ищутся по Email, записанном в массиве session (при авторизации)
+
+	Если поле ArrayName не задан, то обновлять пользовательские данные, иначе обновлять запись
 */
 const InsertData = (req, res) => {
-	const ArrayName = req.body.ArrayName;
-	delete req.body.ArrayName;
-
-	console.log(req.body);
-	req.body.Status = 'Отправлено'
-	
-	if (req.session.role === 'admin') {
-		User.findOneAndUpdate({ "Office": req.body.Office }, {$push: {[ArrayName]: req.body}}, function(err, result) {
-			if (err) throw err;
-			res.status(200).json({});
-		});
+	if (!req.body.ArrayName) {
+		User.findOneAndUpdate({_id: req.body.id}, { 
+			$set: {
+			"LastName": req.body.LastName,
+			"FirstName": req.body.FirstName,
+			"MiddleName": req.body.MiddleName,
+			"Office": req.body.Office,
+			"Email": req.body.Email,
+			"Phone": req.body.Phone,
+			"FullCompanyName": req.body.FullCompanyName,
+			"ShortCompanyName": req.body.ShortCompanyName,
+			"Address": req.body.Address,
+			"INN": req.body.INN,
+			"KPP": req.body.KPP,
+			"OGRN": req.body.OGRN,
+			"Bank": req.body.Bank,
+			"BIK": req.body.BIK,
+			"CorporateAcc": req.body.CorporateAcc,
+			"PaymentAcc": req.body.PaymentAcc
+		}}).exec(function(err, result) {
+			if (err) {
+				res.status(500).json({response: err});
+			} else {
+				console.log(result);
+				res.status(200).json({ok: true});
+			}
+		})
 	}
 
-	else if (req.session.role === 'user') {
-		User.findOneAndUpdate({ "Email": req.session.email }, {$push: {[ArrayName]: req.body}}, function(err, result) {
-			if (err) throw err;
-			res.status(200).json({});
-		});
-	}
-	
 	else {
-		res.status(401).json({ message: 'Отказано в доступе' });
+		const ArrayName = req.body.ArrayName;
+		delete req.body.ArrayName;
+
+		req.body.Status = 'Отправлено';
+		
+		if (req.session.role === 'admin') {
+			User.findOneAndUpdate({ "Office": req.body.Office }, {$push: {[ArrayName]: req.body}}, function(err, result) {
+				if (err) throw err;
+				res.status(200).json({});
+			});
+		}
+
+		else if (req.session.role === 'user') {
+			User.findOneAndUpdate({ "Email": req.session.email }, {$push: {[ArrayName]: req.body}}, function(err, result) {
+				if (err) throw err;
+				res.status(200).json({});
+			});
+		}
+		
+		else {
+			res.status(401).json({ message: 'Отказано в доступе' });
+		}
 	}
 }
+
 module.exports = { InsertData };

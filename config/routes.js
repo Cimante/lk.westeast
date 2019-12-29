@@ -19,6 +19,7 @@ module.exports = (app) => {
 	});
 
 	app.post('/read-users', ReadUser.UsersList);
+	app.post('/read-user', ReadUser.OneUser);
 	app.post('/insert-data', InsertData.InsertData);
 	app.post('/read-data', ReadData.ReadData);
 }

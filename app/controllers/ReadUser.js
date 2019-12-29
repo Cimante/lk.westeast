@@ -16,4 +16,26 @@ const UsersList = (req, res) => {
 	}
 }
 
-module.exports = { UsersList };
+const OneUser = (req, res) => {
+	if (req.session.role === 'admin') {
+		console.log(req.body);
+		User.findById(req.body.id, function(err, result) {
+			if (err) throw err;
+			var obj = result.toObject();
+			Object.keys(obj).forEach(function(key) {
+				if (typeof obj[key] === 'object') {
+					delete obj[key];
+				}
+			});
+			delete obj.Password;
+			delete obj.__v;
+			delete obj.Role;
+
+			res.status(200).json({response: obj});
+		})
+	} else {
+		res.status(403).json({ response: "Тебе сюда нельзя" });
+	}
+}
+
+module.exports = { UsersList, OneUser };

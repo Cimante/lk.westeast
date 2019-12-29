@@ -20,6 +20,14 @@ function ReadUsers() {
 					<td>${users.response[user].FirstName}</td>
 					<td>${users.response[user].MiddleName}</td>
 					<td>${users.response[user].Email}</td>
+					<td>
+						<button class="btn btn-warning btn-sm mr-2" id="userUpdate" type="button" data-id="${user}" data-toggle="modal" data-target="#updateUser">
+							<span>Редактировать</span>
+						</button>
+						<button class="btn btn-danger btn-sm" id="userDelete" type="button" data-id="${user}">
+							<span>Удалить</span>
+						</button>
+					</td>
 					</tr>
 					`);
 				}	
@@ -49,7 +57,6 @@ function ReadData(Arr, Selector) {
 				}
 				htmlString += `</tr>`;
 			}
-			console.log(htmlString);
 			$(`tbody${Selector}--body`).html(htmlString);
 		});
 	});
@@ -159,7 +166,6 @@ $(document).ready(function() {
 	});
 
 	$('a[data-query]').click(function() {
-		console.log($(this).data('query'), $(this).attr('href'));
 		ReadData($(this).data('query'), $(this).attr('href'));
 	});
 
@@ -170,11 +176,16 @@ $(document).ready(function() {
 
 		let inputs = $(`form#${ $(this).attr('form') }`).find('input');
 		let storage = {};
-		storage.ArrayName = $(this).data('storage');
-
 		$.each(inputs, function(key, value) {
 			storage[value.name] = value.value;
 		});
+		if ($(this).data('storage')) {
+			storage.ArrayName = $(this).data('storage');
+		}
+		if ($(this).data('id')) {
+			let temp = JSON.parse($(this).data('id'));
+			storage.id = temp.id;
+		}
 
 		$.ajax({
 			url:'/insert-data',
@@ -182,11 +193,30 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(storage)
 		}).done(function(data) {
-			alert('Заявка успешно добавлена!');
+			alert('Успешно!');
 			window.location.reload();
 		}).fail(function(data) {
-			alert('Всё летит в пизду');
+			alert(`Всё пошло не по плану.\n${data.response}`);
 			// в случае фэйла возвращать массив некорректных полей. вызывать invalid для них
 		})
-	})
+	});
+
+	// просто click не сработает на кнопке, которой нет в DOM-дереве изначально
+	// так что вешаем событие несколько иначе:
+	$('body').on('click', 'button#userUpdate', function() {
+		const id = JSON.stringify({ id: $(this).data('id') });
+		$('button[form="updateUser--Form"]').data('id', id);
+
+		$.ajax({
+			url: '/read-user',
+			type: 'POST',
+			contentType: 'application/json',
+			data: id
+		}).done(function(data) {
+			for (let item in data.response) {
+				$('#updateUser--Form').find(`input[name="${item}"]`).val(data.response[item]).attr('disabled', false);
+			}
+		});
+	});
+	
 });
