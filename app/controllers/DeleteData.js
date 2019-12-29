@@ -4,14 +4,10 @@ mongoose.set('useFindAndModify', false);
 const User = mongoose.model('User');
 
 const DeleteData = (req, res) => {
-    /*
-    User.update({}, {$pull: { [req.body.storage]: { _id: req.body.id } } }, { multi: false }, (err, result) => {
-        if (err) res.status(500).json({ msg: err });
-        else res.status(200).json({ ok : true });
-    })
-
-    */
-    // res.status(200).json({ ok : true, res: req.body });
+    User.update({Role: 'user'}, {$pull: {[req.body.storage] : { _id: req.body.id }}}, function(err, result) {
+        if (err) throw err;
+        res.status(200).json({msg: result});
+    });
 }
 
 module.exports = { DeleteData };
