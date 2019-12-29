@@ -55,6 +55,7 @@ function ReadData(Arr, Selector) {
 					if (item_0 === "_id") continue;
 					htmlString += `<td>${data.response[item][item_0]}</td>`
 				}
+				htmlString += `<td><button class="btn btn-danger" id="deleteDecl" data-id="${data.response[item]._id}" data-storage="${Arr}">Удалить</button></td>`;
 				htmlString += `</tr>`;
 			}
 			$(`tbody${Selector}--body`).html(htmlString);
@@ -234,7 +235,16 @@ $(document).ready(function() {
 				window.location.reload();
 			});
 		}
-
 	});
+
+	$('body').on('click', 'button#deleteDecl', function() {
+		if (confirm('Удалить эту заявку?')) {
+			let data = {
+				id: $(this).data('id'),
+				storage: $(this).data('storage')
+			};
+			// $.ajax();
+		}
+	})
 	
 });
