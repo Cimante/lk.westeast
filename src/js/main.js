@@ -173,32 +173,34 @@ $(document).ready(function() {
 
 	$('button[form]').click(function(e) {
 		e.preventDefault();
+		if ($(this).attr('form') !== 'createNewUser--Form') {
+			let inputs = $(`form#${ $(this).attr('form') }`).find('input');
+			let storage = {};
+			$.each(inputs, function(key, value) {
+				storage[value.name] = value.value;
+			});
+			if ($(this).data('storage')) {
+				storage.ArrayName = $(this).data('storage');
+			}
+			if ($(this).data('id')) {
+				let temp = JSON.parse($(this).data('id'));
+				storage.id = temp.id;
+			}
 
-		let inputs = $(`form#${ $(this).attr('form') }`).find('input');
-		let storage = {};
-		$.each(inputs, function(key, value) {
-			storage[value.name] = value.value;
-		});
-		if ($(this).data('storage')) {
-			storage.ArrayName = $(this).data('storage');
+			$.ajax({
+				url:'/insert-data',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(storage)
+			}).done(function(data) {
+				alert('Успешно!');
+				window.location.reload();
+			}).fail(function(data) {
+				alert(`Всё пошло не по плану.\n${data.response}`);
+				// в случае фэйла возвращать массив некорректных полей. вызывать invalid для них
+			})
 		}
-		if ($(this).data('id')) {
-			let temp = JSON.parse($(this).data('id'));
-			storage.id = temp.id;
-		}
-
-		$.ajax({
-			url:'/insert-data',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(storage)
-		}).done(function(data) {
-			alert('Успешно!');
-			window.location.reload();
-		}).fail(function(data) {
-			alert(`Всё пошло не по плану.\n${data.response}`);
-			// в случае фэйла возвращать массив некорректных полей. вызывать invalid для них
-		})
+		
 	});
 
 	// просто click не сработает на кнопке, которой нет в DOM-дереве изначально
@@ -217,6 +219,22 @@ $(document).ready(function() {
 				$('#updateUser--Form').find(`input[name="${item}"]`).val(data.response[item]).attr('disabled', false);
 			}
 		});
+	});
+
+	$('body').on('click', 'button#userDelete', function() {
+		// показать лоадер
+		if (confirm('Удалить пользователя?')) {
+			$.ajax({
+				url: '/delete-user',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify( {id: $(this).data('id') })
+			}).done(function(data) {
+				alert('Пользователь успешно удалён!');
+				window.location.reload();
+			});
+		}
+
 	});
 	
 });
