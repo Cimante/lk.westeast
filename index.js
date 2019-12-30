@@ -25,15 +25,14 @@ mongoose.connect(mongoUri, mongoPresets)
   )
   .catch((err) => console.error(`Error connecting to mongo: ${mongoUri}`, err))
 
-//app.locals.collectionUsers = client.db(dbname).collection('users');
-
 app.get('/', (req, res) => {
   const id = req.session.id;
   const email = req.session.email;
   const name = req.session.name;
   const role = req.session.role;
+  const office = req.session.office;
 
-  res.render('index.pug', {user: {id, email, name, role}});
+  res.render('index.pug', {user: {id, email, name, role, office}});
 });
 
 app.get('/reg', function (req, res) {
@@ -47,47 +46,3 @@ app.get('/create-success', function (req, res) {
 app.get('/dashboard', function (req, res) {
   res.render('dashboard.pug');
 });
-/*
-app.post('/adduser', function (req, res) {
-  data.push(JSON.parse(JSON.stringify(req.body)));
-  res.redirect('/dashboard');
-});
-
-function createUser(req, res, next) {
-  let newUser = JSON.parse(JSON.stringify(req.body));
-  newUser.Pass = Math.random().toString(36).slice(-8);
-  Acc.push(newUser);
-
-  users.push({email: newUser.Email, pass: newUser.Pass, role: 'user'});
-  console.log(users);
-
-  req.dataProcessed = JSON.stringify(newUser.Email);
-  return next();
-}
-
-function createUserSuccess(req, res) {
-  const email = JSON.parse(req.dataProcessed);
-  res.render('create-success.pug', {email});
-}
-
-app.post('/create-user', createUser, createUserSuccess);
-
-function findUser(req, res, next) {
-  let sign = JSON.parse(JSON.stringify(req.body));
-
-  for (user in users) {
-    if (users[user].email == sign.email && users[user].pass == sign.pass) {
-      req.dataProcessed = {email: sign.email, role: users[user].role};
-      return next();
-    }
-  }
-};
-
-function isFound(req, res) {
-  let user = JSON.parse(JSON.stringify(req.dataProcessed));
-  res.render('dashboard.pug', { login: user.email, role: user.role });
-}
-
-app.post('/auth', findUser, isFound);
-
-*/

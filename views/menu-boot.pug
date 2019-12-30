@@ -5,20 +5,36 @@
 			if (user.role === 'admin')
 				a.nav-link.active#v-pills-one-tab(data-toggle="pill" href="#v-pills-one" role="tab" aria-controls="v-pills-one" aria-selected="true") Клиенты и компании
 				a.nav-link#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявки на звонок
+					span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 			else
 				a.nav-link.active#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявки на звонок
+					span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 
 			a.nav-link#create-pass-decl-tab(data-toggle="pill" data-query="Passports" href="#create-pass-decl" role="tab" aria-controls="create-pass-decl" aria-selected="false") Пропуск ВНОС/ВЫНОС
+				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
+
 			a.nav-link#create-losscard-decl-tab(data-toggle="pill" data-query="LossCards" href="#create-losscard-decl" role="tab" aria-controls="create-losscard-decl" aria-selected="false") ПОРЧА/УТРАТА карт
+				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
+				
 			a.nav-link#create-docsorder-decl-tab(data-toggle="pill" data-query="DocsOrders" href="#create-docsorder-decl" role="tab" aria-controls="create-docsorder-decl" aria-selected="false") Заказ документов
+				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
+
 			a.nav-link#create-carpass-decl-tab(data-toggle="pill" data-query="PassCars" href="#create-carpass-decl" role="tab" aria-controls="create-carpass-decl" aria-selected="false") Пропуски на авто
+				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
+
 			a.nav-link#create-personpass-decl-tab(data-toggle="pill" href="#create-personpass-decl" role="tab" aria-controls="create-personpass-decl" aria-selected="false") Пропуски на персону
+				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
+
 			a.nav-link#create-works-decl-tab(data-toggle="pill" data-query="WorkersOrders" href="#create-works-decl" role="tab" aria-controls="create-works-decl" aria-selected="false") Заявки на работы
+				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
+
 	.col-10
 		.tab-content#v-pills-tabContent
 			if (user.role === 'admin')
 				.tab-pane.fade.show.active#v-pills-one(role="tabpanel" aria-labelledby="v-pills-one-tab")
-					h1.mb-5.mr-5#heading Клиенты и компании
+					.d-flex.justify-content-start.align-items-center#heading
+						h1.mb-5.mr-4 Клиенты и компании
+						span.spinner-border.mb-5.d-none(role="status" aria-hidden="true")
 					#content_0--heading
 						table.table.table-dark.table-striped.table-hover
 							thead

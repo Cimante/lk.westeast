@@ -4,7 +4,6 @@ const bCrypt = require('bcryptjs');
 const User = mongoose.model('User');
 
 const signIn = (req, res) => {
-	// if (req.session.user) return res.redirect('/dashboard');
 	const { email, password } = JSON.parse(JSON.stringify(req.body));
 
 	User.findOne({ Email: email })

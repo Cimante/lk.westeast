@@ -1,9 +1,5 @@
 // здесь будем брать данные из полей форм, проверять их и стрелять поповерами
 
-// TODO: Завести на клик по элементу навигации функцию с POST-запросом. 
-// 		 В ответе массив объектов. Если admin, то возвращать массив ото всех пользователей.
-//		 Если user, то только свои заявки
-
 function ReadUsers() {
 	$.ajax({
 		url: '/read-users',
@@ -30,7 +26,7 @@ function ReadUsers() {
 					</td>
 					</tr>
 					`);
-				}	
+				}
 			})
 		});
 };
@@ -47,6 +43,7 @@ function ReadData(Arr, Selector) {
 		contentType: 'application/json',
 		data: JSON.stringify({Arr: Arr})
 	}).done(function(data) {
+		console.log(Selector);
 		$(document).ready(function() {
 			var htmlString = "";
 			for (let key in data) {
@@ -55,13 +52,13 @@ function ReadData(Arr, Selector) {
 				for (let item in data[key]) {
 					for (let item_0 in data[key][item]) {
 						if (item_0 === "_id") continue;
-						htmlString += `<td>${data[key][item][item_0]}</td>`
+						htmlString += `<td>${data[key][item][item_0]}</td>`;
 					}
 					htmlString += `<td><button class="btn btn-danger btn-sm" id="deleteDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">Удалить</button></td>`;
 					htmlString += `</tr>`;
 				}
-				$(`tbody${Selector}--body`).html(htmlString);
 			}
+			$(`tbody${Selector}--body`).html(htmlString);
 		});
 	});
 }
@@ -90,10 +87,40 @@ function getNewUserData() {
 }
 
 window.onload = function() {
-	// Искать тэг a с классами nav-item active
-	// Если у найденного тэга id #v-pills-one-tab, то ReadUsers();
-	// Иначе брать data-query этот тэга и в ReadData();
-	ReadUsers();
+	$(document).ready(function () {
+		if ($('a.nav-link.active').attr('id') === 'v-pills-one-tab') {
+			ReadUsers();
+		} else {
+			ReadData('Calls', '#create-call-decl');
+		}
+
+		const update = setInterval(() => {
+			$.ajax({
+				url: '/get-counters',
+				type: 'POST',
+				contentType: 'application/json'
+			}).done(function(data) {
+				for (let key in data) {
+					if (data[key] > 0) {
+						$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
+						ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'));
+					}
+				}
+				}).fail(function() {})
+			}, 10000);
+
+		$.ajax({
+			url: '/get-counters',
+			type: 'POST',
+			contentType: 'application/json'
+		}).done(function(data) {
+			for (let key in data) {
+				if (data[key] > 0) {
+					$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
+				}
+			}
+		}).fail(function() {});
+	});
 }
 
 $(document).ready(function() {
@@ -121,6 +148,8 @@ $(document).ready(function() {
 	
 	$('button#btn_log').on('click', function(e) {
 		e.preventDefault();
+		$(this).attr('disabled', true);
+		$(this).children('.spinner-border').removeClass('d-none');
 
 		let data = {
 			email: $('input#login').val(),
@@ -142,6 +171,8 @@ $(document).ready(function() {
 		}).fail(function(data) {
 			data = JSON.parse(JSON.stringify(data));
 			$('span#invalid').removeClass('d-none').addClass('text-center').text(data.responseJSON.message);
+			$('button#btn_log').attr('disabled', false);
+			$('button#btn_log').children('.spinner-border').addClass('d-none');
 		})
 	});
 
