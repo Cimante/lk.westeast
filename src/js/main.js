@@ -49,21 +49,23 @@ function ReadData(Arr, Selector) {
 	}).done(function(data) {
 		$(document).ready(function() {
 			var htmlString = "";
-			for (let item in data.response) {
+			for (let key in data) {
+				// data-userID здесь, лежит в key
 				htmlString += `<tr class="animated fadeIn faster">`;
-				for(let item_0 in data.response[item]) {
-					if (item_0 === "_id") continue;
-					htmlString += `<td>${data.response[item][item_0]}</td>`
+				for (let item in data[key]) {
+					for (let item_0 in data[key][item]) {
+						if (item_0 === "_id") continue;
+						htmlString += `<td>${data[key][item][item_0]}</td>`
+					}
+					htmlString += `<td><button class="btn btn-danger btn-sm" id="deleteDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">Удалить</button></td>`;
+					htmlString += `</tr>`;
 				}
-				htmlString += `<td><button class="btn btn-danger" id="deleteDecl" data-id="${data.response[item]._id}" data-storage="${Arr}">Удалить</button></td>`;
-				htmlString += `</tr>`;
+				$(`tbody${Selector}--body`).html(htmlString);
 			}
-			$(`tbody${Selector}--body`).html(htmlString);
 		});
 	});
 }
 				
-
 function getNewUserData() {
 	const data = {
 		LastName: $('#LastName').val(),
@@ -240,10 +242,19 @@ $(document).ready(function() {
 	$('body').on('click', 'button#deleteDecl', function() {
 		if (confirm('Удалить эту заявку?')) {
 			let data = {
+				userID: $(this).data('userid'),
 				id: $(this).data('id'),
 				storage: $(this).data('storage')
 			};
-			// $.ajax();
+			$.ajax({
+				url: '/delete-data',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data)
+			}).done(function(response) {
+				alert('Заявка успешно удалена\n', response);
+				window.location.reload();
+			})
 		}
 	})
 	

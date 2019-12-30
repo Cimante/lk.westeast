@@ -4,6 +4,16 @@ const User = mongoose.model('User');
 // TODO: если данные читает админ, то статус отправлено меняется на статус просмотрено
 const ReadData = (req, res) => {
 	const Arr = req.body.Arr;
+	User.find({Role: 'user'}, function(err, result) {
+		if (err) throw err;
+		let data = {};
+		for (user in result) {
+			data[result[user]._id] = result[user][Arr]
+		}
+		res.json(data);
+	})
+	/*
+	const Arr = req.body.Arr;
 	if (req.session.role === 'admin') {
 		User.find({Role: 'user'}, function (err, result) {
 			if (err) throw err;
@@ -28,6 +38,7 @@ const ReadData = (req, res) => {
 			res.status(200).json({response: data});
 		});
 	}
+	*/
 }
 
 module.exports = { ReadData };

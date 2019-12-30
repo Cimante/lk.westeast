@@ -34,7 +34,6 @@ const InsertData = (req, res) => {
 			if (err) {
 				res.status(500).json({response: err});
 			} else {
-				console.log(result);
 				res.status(200).json({ok: true});
 			}
 		})
