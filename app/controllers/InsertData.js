@@ -44,11 +44,12 @@ const InsertData = (req, res) => {
 		delete req.body.ArrayName;
 
 		req.body.Status = 'Отправлено';
+		console.log(req.body);
 		
 		if (req.session.role === 'admin') {
 			User.findOneAndUpdate({ "Office": req.body.Office }, {$push: {[ArrayName]: req.body}}, function(err, result) {
 				if (err) throw err;
-				res.status(200).json({});
+				res.status(200).json({data: result});
 			});
 		}
 

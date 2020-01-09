@@ -1,20 +1,17 @@
 .dashboard
-	nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
-		a.navbar-brand(href="/dashboard")
+	.d-flex.justify-content-start.align-items-center
+		a.navbar-brand.mt-3.ml-4(href="/dashboard")
 			img.w-100(src="images/logo2.png", alt="logo")
-		button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
-			span.navbar-toggler-icon
 
-		#navbarNavAltMarkup.collapse.navbar-collapse.ml-3
-			.navbar-nav
-				span.nav-item.mr-5(href='#') Здравствуйте, #{user.name}
-					br
-					a.badge.badge-pill.badge-danger#logout(href="/logout") Выйти
-				if (user.role === 'admin')
-					button.btn.btn-outline-success#addUser.nav-item.mr-4(type="button" data-toggle="modal" data-target="#createNewUser") 
-						i.far.fa-user.mr-2
-						| Добавить пользователя
-		
+		.ml-3
+			span.mr-5(href='#') Здравствуйте, #{user.name}! Ваш офис: #{user.office}
+				br
+				a.badge.badge-pill.badge-danger#logout(href="/logout") Выйти
+		if (user.role === 'admin')
+			button.btn.btn-outline-success.btn-sm#addUser.ml-5(type="button" data-toggle="modal" data-target="#createNewUser") 
+				i.far.fa-user.mr-2
+				| Добавить пользователя
+
 	section.container-fluid.animated.fadeIn.faster
 		.mt-5
 			include menu-boot

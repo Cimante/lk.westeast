@@ -9,7 +9,7 @@ const ReadData = (req, res) => {
 			if (err) throw err;
 			let data = {};
 			for (user in result) {
-				data[result[user]._id] = result[user][Arr]
+				data[result[user]._id] = result[user][Arr];
 			}
 			res.json(data);
 		})
@@ -19,7 +19,7 @@ const ReadData = (req, res) => {
 			if (err) throw err;
 			let data = {};
 			for (user in result) {
-				data[result[user]._id] = result[user][Arr]
+				data[result[user]._id] = result[user][Arr];
 			}
 			res.json(data);
 		})

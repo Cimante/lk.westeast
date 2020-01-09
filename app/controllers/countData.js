@@ -19,9 +19,9 @@ const Count = (req, res) => {
 						data.Calls += 1;
 					};
 				}
-				for (item in result[key].Passorts) {
-					if (result[key].Passorts[item].Status === 'Отправлено') {
-						data.Passorts += 1;
+				for (item in result[key].Passports) {
+					if (result[key].Passports[item].Status === 'Отправлено') {
+						data.Passports += 1;
 					};
 				}
 				for (item in result[key].LossCards) {

@@ -28,6 +28,7 @@
     "gulp-purgecss": "^1.2.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
+    "inputmask": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.3",

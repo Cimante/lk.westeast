@@ -1,5 +1,3 @@
-//- Добавить атрибут required для полей
-
 if (user.role === 'admin')
 	#createNewUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby='CreateNewUser', aria-hidden='true')
 		.modal-dialog.modal-dialog-centered.modal-lg(role='document')
@@ -10,70 +8,70 @@ if (user.role === 'admin')
 						span(aria-hidden='true') 
 							i.far.fa-times-circle
 				.modal-body
-					#createNewUser--Form
+					form#createNewUser--Form
 						.row.form-group.dark-field.d-flex.align-items-center
 							.col-4
 								label.my-0.mb-2(for="LastName") Фамилия
-								input.form-control.col-12#LastName(type="text" name="LastName" require)
+								input.form-control.col-12#LastName(type="text" name="LastName" required)
 							.col-4
 								label.my-0.mb-2(for="FirstName") Имя
-								input.form-control#FirstName(type="text" name="FirstName" require)
+								input.form-control#FirstName(type="text" name="FirstName" required)
 							.col-4
 								label.my-0.mb-2(for="MiddleName") Отчество
-								input.form-control#MiddleName(type="text" name="MiddleName" require)
+								input.form-control#MiddleName(type="text" name="MiddleName" required)
 							
 						.row.form-group.dark-field.d-flex.align-items-center
 							.col-5
 								label.my-0.mb-2(for="Email") Email
-								input.form-control#Email(type="email" name="Email" require)
+								input.form-control#Email(type="email" name="Email" required)
 							.col-5
 								label.my-0.mb-2(for="Phone") Телефон
-								input.form-control#Phone(type="tel" name="Phone" require)
+								input.form-control#Phone(type="tel" name="Phone" required)
 							.col-2
 								label.my-0.mb-2(for="Office") № офиса
-								input.form-control#Office(type="text" name="Office" require)
+								input.form-control#Office(type="text" name="Office" required)
 						.row
 							hr.separator
 						
 						.row.form-group.dark-field.d-flex.align-items-center
 							.col-7
 								label.my-0.mb-2(for="FullCompanyName") Полное название компании
-								input.form-control#FullCompanyName(type="text" name="FullCompanyName" require)
+								input.form-control#FullCompanyName(type="text" name="FullCompanyName" required)
 							.col-5
 								label.my-0.mb-2(for="ShortCompanyName") Краткое название компании
-								input.form-control#ShortCompanyName(type="text" name="ShortCompanyName" require)
+								input.form-control#ShortCompanyName(type="text" name="ShortCompanyName" required)
 
 						.row.form-group.dark-field.d-flex.align-items-center
 							.col-12
 								label.my-0.mb-2(for="Address") Юридический адрес
-								input.form-control#Address(type="text" name="Address" require)
+								input.form-control#Address(type="text" name="Address" required)
 
 						.row.form-group.dark-field.d-flex.align-items-center
 							.col-4
 								label.my-0.mb-2(for="INN") ИНН
-								input.form-control#INN(type="text" name="INN" require)
+								input.form-control#INN(type="text" name="INN" required)
 							.col-4
 								label.my-0.mb-2(for="KPP") КПП
-								input.form-control#KPP(type="text" name="KPP" require)
+								input.form-control#KPP(type="text" name="KPP" required)
 							.col-4
 								label.my-0.mb-2(for="OGRN") ОГРН
-								input.form-control#OGRN(type="text" name="OGRN" require)
+								input.form-control#OGRN(type="text" name="OGRN" required)
 
 						.row.form-group.dark-field.d-flex.align-items-center
 							.col-7
 								label.my-0.mb-2(for="Bank") Банк
-								input.form-control#Bank(type="text" name="Bank" require)
+								input.form-control#Bank(type="text" name="Bank" required)
 							.col-5
 								label.my-0.mb-2(for="BIK") БИК
-								input.form-control#BIK(type="text" name="BIK" require)
+								input.form-control#BIK(type="text" name="BIK" required)
 
 						.row.form-group.dark-field.d-flex.align-items-center
 							.col-6
 								label.my-0.mb-2(for="CorporateAcc") Корпоративный счёт
-								input.form-control#CorporateAcc(type="text" name="CorporateAcc" require)
+								input.form-control#CorporateAcc(type="text" name="CorporateAcc" required)
 							.col-6
 								label.my-0.mb-2(for="PaymentAcc") Расчётный счёт
-								input.form-control#PaymentAcc(type="text" name="PaymentAcc" require)
+								input.form-control#PaymentAcc(type="text" name="PaymentAcc" required)
 						
 				.modal-footer
 					button.btn.btn-dark(type='button', data-dismiss='modal') Закрыть
@@ -94,14 +92,14 @@ if (user.role === 'admin')
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-4
 							label(for="create-call-decl--Office") Номер офиса
-							input.form-control#create-call-decl--Office(type="text" name="Office")
+							input.form-control#create-call-decl--Office(type="text" name="Office" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-6
 							label(for="create-call-decl--Date") Дата
-							input.form-control#create-call-decl--Date(type="date" name="Date")
+							input.form-control#create-call-decl--Date(type="date" name="Date" required)
 						.col-6
 							label(for="create-call-decl--Timestamp") Время
-							input.form-control#create-call-decl--Timestamp(type="time" name="Timestamp")
+							input.form-control#create-call-decl--Timestamp(type="time" name="Timestamp" required)
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-call-decl--Form" data-storage="Calls") 
@@ -117,36 +115,36 @@ if (user.role === 'admin')
 					span(aria-hidden='true') 
 						i.far.fa-times-circle
 			.modal-body
-				form#create-call-pass--Form(action="#" method="POST")
+				form#create-pass-decl--Form(action="#" method="POST")
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-4
 							label(for="create-pass-decl--Office") Номер офиса
-							input.form-control#create-pass-decl--Office(type="text" name="Office")
+							input.form-control#create-pass-decl--Office(type="text" name="Office" required)
 						.col-8
 							label(for="create-pass-decl--Date") Дата
-							input.form-control#create-pass-decl--Date(type="date" name="Date")
+							input.form-control#create-pass-decl--Date(type="date" name="Date" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-6 
 							label(for="create-pass-decl--Start-Time") Время начала
-							input.form-control#create-pass-decl--Start-Time(type="time" name="Starttime")
+							input.form-control#create-pass-decl--Start-Time(type="time" name="Starttime" required)
 						.col-6
 							label(for="create-pass-decl--End-Time") Время конца
-							input.form-control#create-pass-decl--End-Time(type="time" name="Endtime")
+							input.form-control#create-pass-decl--End-Time(type="time" name="Endtime" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12
 							label(for="create-pass-decl--Wealth") Материальные ценности
-							textarea.form-control#create-pass-decl--Wealth(rows="4" name="Wealth")
+							textarea.form-control#create-pass-decl--Wealth(rows="4" name="Wealth" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-3
 							label(for="create-pass-decl--Quantity") Кол-во
-							input.form-control#create-pass-decl--Quantity(type="number" name="Quantity" min="1" max="10000")
+							input.form-control#create-pass-decl--Quantity(type="number" name="Quantity" min="1" max="10000" required)
 						.col-9
 							label(for="create-pass-decl--Car") Авто
-							input.form-control#create-pass-decl--Car(type="text" name="Car")
+							input.form-control#create-pass-decl--Car(type="text" name="Car" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12
 							label(for="create-pass-decl--TenantRepres") Представитель арендатора
-							input.form-control#create-pass-decl--TenantRepres(type="text" name="TenantRepres")
+							input.form-control#create-pass-decl--TenantRepres(type="text" name="TenantRepres" required)
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-pass-decl--Form" data-storage="Passports") 
@@ -166,18 +164,18 @@ if (user.role === 'admin')
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-4
 							label(for="create-losscard-decl--Office") Номер офиса
-							input.form-control#create-losscard-decl--Office(type="text" name="Office")
+							input.form-control#create-losscard-decl--Office(type="text" name="Office" required)
 						.col-8
 							label(for="create-losscard-decl--CardID") Номер карты
-							input.form-control#create-losscard-decl--CardID(type="text" name="CardID")
+							input.form-control#create-losscard-decl--CardID(type="text" name="CardID" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12
 							label(for="create-losscard-decl--RegisteredIn") Зарегистрирована на Имя
-							input.form-control#create-losscard-decl--RegisteredIn(type="text" name="RegisteredIn")
+							input.form-control#create-losscard-decl--RegisteredIn(type="text" name="RegisteredIn" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12
 							label(for="create-losscard-decl--CompanyName") Название компании
-							input.form-control#create-losscard-decl--CompanyName(type="text" name="CompanyName")
+							input.form-control#create-losscard-decl--CompanyName(type="text" name="CompanyName" required)
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-losscard-decl--Form" data-storage="LossCards") 
@@ -197,14 +195,14 @@ if (user.role === 'admin')
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-4
 							label(for="create-docsorder-decl--Office") Номер офиса
-							input.form-control#create-docsorder-decl--Office(type="text" name="Office")
+							input.form-control#create-docsorder-decl--Office(type="text" name="Office" required)
 						.col-8
 							label(for="create-docsorder-decl--Date") Дата
-							input.form-control#create-docsorder-decl--Date(type="date" name="Date")
+							input.form-control#create-docsorder-decl--Date(type="date" name="Date" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12
 							label(for="create-docsorder-decl--Doctype") Вид документа
-							input.form-control#create-docsorder-decl--Doctype(type="text" name="Doctype")
+							input.form-control#create-docsorder-decl--Doctype(type="text" name="Doctype" required)
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-docsorder-decl--Form" data-storage="DocsOrders") 
@@ -224,17 +222,18 @@ if (user.role === 'admin')
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-4
 							label(for="create-carpass-decl--Office") Номер офиса
-							input.form-control#create-carpass-decl--Office(type="text" name="Office")
+							input.form-control#create-carpass-decl--Office(type="text" name="Office" required)
 						.col-8
 							label(for="create-carpass-decl--Date") Дата
-							input.form-control#create-carpass-decl--Date(type="date" name="Date")
+							input.form-control#create-carpass-decl--Date(type="date" name="Date" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-6
 							label(for="create-carpass-decl--Car-brand") Марка авто
-							input.form-control#create-carpass-decl--Car-brand(type="text" name="CarBrand")
+							input.form-control#create-carpass-decl--Car-brand(type="text" name="CarBrand" required list="CarList")
+							include carList
 						.col-6
 							label(for="create-carpass-decl--Gov-Num") Гос. номер
-							input.form-control#create-carpass-decl--Gov-Num(type="text" name="GovermentNumber")
+							input.form-control#create-carpass-decl--Gov-Num(type="text" name="GovermentNumber" required)
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-carpass-decl--Form" data-storage="PassCars") 
@@ -254,18 +253,18 @@ if (user.role === 'admin')
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-4
 							label(for="create-personpass-decl--Office") Номер офиса
-							input.form-control#create-personpass-decl--Office(type="text" name="Office")
+							input.form-control#create-personpass-decl--Office(type="text" name="Office" required)
 						.col-8
 							label(for="create-personpass-decl--Date") Дата
-							input.form-control#create-personpass-decl--Date(type="date" name="Date")
+							input.form-control#create-personpass-decl--Date(type="date" name="Date" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12 
 							label(for="create-personpass-decl--Passport") Серия и номер паспорта
-							input.form-control#create-personpass-decl--Passport(type="text" name="Passport")
+							input.form-control#create-personpass-decl--Passport(type="text" name="Passport" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12 
 							label(for="create-personpass-decl--Full-name") Имя и фамилия
-							input.form-control#create-personpass-decl--Full-name(type="text" name="FullName")
+							input.form-control#create-personpass-decl--Full-name(type="text" name="FullName" required)
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-personpass-decl--Form") 
@@ -285,21 +284,21 @@ if (user.role === 'admin')
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-4
 							label(for="create-works-decl--Office") Номер офиса
-							input.form-control#create-works-decl--Office(type="text" name="Office")
+							input.form-control#create-works-decl--Office(type="text" name="Office" required)
 						.col-8
 							label(for="create-works-decl--Date") Дата
-							input.form-control#create-works-decl--Date(type="date" name="Date")
+							input.form-control#create-works-decl--Date(type="date" name="Date" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-12 
 							label(for="create-works-decl--Responsible") Ответственный
-							input.form-control#create-works-decl--Responsible(type="text" name="Responsible")
+							input.form-control#create-works-decl--Responsible(type="text" name="Responsible" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-6
 							label(for="create-works-decl--Phone") Телефон
-							input.form-control#create-works-decl--Phone(type="text" name="Phone")
+							input.form-control#create-works-decl--Phone(type="text" name="Phone" required)
 						.col-6
 							label(for="create-works-decl--Worktype") Вид работ
-							input.form-control#create-works-decl--Worktype(type="text" name="Worktype")
+							input.form-control#create-works-decl--Worktype(type="text" name="Worktype" required)
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-works-decl--Form" data-storage="WorkersOrders") 

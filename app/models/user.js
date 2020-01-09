@@ -29,8 +29,9 @@ const UserSchema = new mongoose.Schema({
 	Passports: [{
 		Office 			: { type: String, require: true },
 		Date			: { type: Date, require: true },
-		TimeFromTo		: { type: String, require: true },
-		MaterialValues	: { type: String, require: false },
+		Starttime		: { type: String, require: true },
+		Endtime			: { type: String, require: true },
+		Wealth			: { type: String, require: false },
 		Quantity		: { type: Number, require: true },
 		Car				: { type: String, require: true },
 		TenantRepres	: { type: String, require: true },
@@ -38,7 +39,7 @@ const UserSchema = new mongoose.Schema({
 	}],
 	LossCards: [{
 		Office 			: { type: String, require: true },
-		CardNumber		: { type: String, require: true },
+		CardID			: { type: String, require: true },
 		RegisteredIn 	: { type: String, require: true },
 		CompanyName 	: { type: String, require: true },
 		Status			: { type: String, require: true }
