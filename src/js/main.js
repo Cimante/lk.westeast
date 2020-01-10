@@ -52,6 +52,7 @@ function ReadData(Arr, Selector) {
 			var htmlString = "";
 			for (let key in data) {
 				// data-userID здесь, лежит в key
+				if (data[key].length === 0) continue;
 				htmlString += `<tr>`;
 				if (data[key] === 'user') continue;
 				for (let item in data[key]) {
@@ -378,7 +379,7 @@ $(document).ready(function() {
 				$.ajax({
 					url: '/add-user',
 					type: 'POST',
-					data: data,
+					data: storage,
 				}).done(function(data) {
 					alert(`Пользователь ${data.email} успешно добавлен!`);
 					window.location.reload();
