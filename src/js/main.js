@@ -229,7 +229,6 @@ function validate(inputs) {
 		}
 	}
 
-	console.log(errors);
 	return errors
 }
 
@@ -272,7 +271,6 @@ window.onload = function() {
 				}).done(function(data) {
 					for (let key in data) {
 						if (data[key] > 0) {
-							console.log(key, data[key])
 							$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
 							
 							ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'));

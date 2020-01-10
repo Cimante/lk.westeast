@@ -65,7 +65,6 @@ const InsertData = (req, res) => {
 			}).then(() => {
 				User.findOneAndUpdate({ "Email": req.session.email }, {$push: {[ArrayName]: data}}, function(err, result) {
 					if (err) throw err;
-					console.log("INSERT: ", data)
 					res.status(200).json({});
 				});
 			})

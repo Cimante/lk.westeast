@@ -18,7 +18,6 @@ const UsersList = (req, res) => {
 
 const OneUser = (req, res) => {
 	if (req.session.role === 'admin') {
-		console.log(req.body);
 		User.findById(req.body.id, function(err, result) {
 			if (err) throw err;
 			var obj = result.toObject();

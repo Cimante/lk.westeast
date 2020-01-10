@@ -7,7 +7,7 @@ const sendPassword = (password, email) => {
 	`;
 
 	const send = {
-		from: 'Администрация WestEast <admin@westeast.biz>',
+		from: 'Администрация WestEast <lk.west@yandex.ru>',
 		to: `<${email}>`,
 		subject: `Успешная регистрация в Личном Кабинете WestEast`,
 		html: mailWithPass
