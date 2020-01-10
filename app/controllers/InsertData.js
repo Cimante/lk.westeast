@@ -55,17 +55,17 @@ const InsertData = (req, res) => {
 		else if (req.session.role === 'user') {
 			let data = {};
 			data.Office = req.session.office
-			for (let item in req.body) {
-				data[item] = req.body[item];
-			}
 			const query = User.find({"Email": req.session.email}, {FullCompanyName: 1});
 
 			query.then((result) => {
 				data.CompanyName = result[0].FullCompanyName;
+				for (let item in req.body) {
+					data[item] = req.body[item];
+				}
 			}).then(() => {
 				User.findOneAndUpdate({ "Email": req.session.email }, {$push: {[ArrayName]: data}}, function(err, result) {
 					if (err) throw err;
-					console.log(data)
+					console.log("INSERT: ", data)
 					res.status(200).json({});
 				});
 			})

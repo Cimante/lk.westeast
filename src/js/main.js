@@ -124,11 +124,20 @@ function ReadData(Arr, Selector) {
 								contentType: 'application/json'
 							}).done(function(data) {
 								for (let key in data) {
-									$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
+									if (data[key] > 0) {
+										$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').removeClass('d-none');
+										$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
+									} else {
+										if (!$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').hasClass('d-none')) {
+											$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').addClass('d-none');
+										}
+									}
+									
+									/*
 									if ($(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text() === "0") {
 										$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').addClass('d-none');
 									} else $(`a.nav-link[data-query="${key}"]`).find('#counterBadge').removeClass('d-none');
-									
+									*/
 								}
 							}).fail(function() {
 								alert('Ошибка чтения счётчиков')
@@ -206,7 +215,7 @@ function validate(inputs) {
 	}
 
 	if (storage.Phone) {
-		if (storage.Phone[4] !== '9' || storage.Phone[4] !== '4') {
+		if (storage.Phone[4] !== '9' && storage.Phone[4] !== '4') {
 			errors.push('Phone');
 			delete storage.Phone;
 		}
@@ -219,6 +228,8 @@ function validate(inputs) {
 			delete storage.Email;
 		}
 	}
+
+	console.log(errors);
 	return errors
 }
 
@@ -261,7 +272,9 @@ window.onload = function() {
 				}).done(function(data) {
 					for (let key in data) {
 						if (data[key] > 0) {
+							console.log(key, data[key])
 							$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
+							
 							ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'));
 						}
 					}
