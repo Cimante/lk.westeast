@@ -4,9 +4,13 @@
 			img.w-100(src="images/logo2.png", alt="logo")
 
 		.ml-3
-			span.mr-5(href='#') Здравствуйте, #{user.name}! Ваш офис: #{user.office}
-				br
-				a.badge.badge-pill.badge-danger#logout(href="/logout") Выйти
+			span.mr-4(href='#') 
+				if (user.role === 'admin')
+					| Здравствуйте, #{user.name}!
+				else 
+					| Здравствуйте, #{user.name}! Ваш офис: #{user.office}
+			br
+			a.badge.badge-pill.badge-danger#logout(href="/logout") Выйти
 		if (user.role === 'admin')
 			button.btn.btn-outline-success.btn-sm#addUser.ml-5(type="button" data-toggle="modal" data-target="#createNewUser") 
 				i.far.fa-user.mr-2

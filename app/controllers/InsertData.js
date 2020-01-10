@@ -44,7 +44,6 @@ const InsertData = (req, res) => {
 		delete req.body.ArrayName;
 
 		req.body.Status = 'Отправлено';
-		console.log(req.body);
 		
 		if (req.session.role === 'admin') {
 			User.findOneAndUpdate({ "Office": req.body.Office }, {$push: {[ArrayName]: req.body}}, function(err, result) {
@@ -54,12 +53,18 @@ const InsertData = (req, res) => {
 		}
 
 		else if (req.session.role === 'user') {
-			User.findOneAndUpdate({ "Email": req.session.email }, {$push: {[ArrayName]: req.body}}, function(err, result) {
-				if (err) throw err;
-				res.status(200).json({});
-			});
+			req.body.Office = req.session.office;
+			const query = User.find({"Email": req.session.email}, {FullCompanyName: 1});
+
+			query.then((result) => {
+				req.body.CompanyName = result[0].FullCompanyName;
+			}).then(() => {
+				User.findOneAndUpdate({ "Email": req.session.email }, {$push: {[ArrayName]: req.body}}, function(err, result) {
+					if (err) throw err;
+					res.status(200).json({});
+				});
+			})
 		}
-		
 		else {
 			res.status(401).json({ message: 'Отказано в доступе' });
 		}
