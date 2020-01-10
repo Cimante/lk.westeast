@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
-// TODO: если данные читает админ, то статус отправлено меняется на статус просмотрено
 const ReadData = (req, res) => {
 	const Arr = req.body.Arr;
 	if (req.session.role === 'admin') {
@@ -21,6 +20,7 @@ const ReadData = (req, res) => {
 			for (user in result) {
 				data[result[user]._id] = result[user][Arr];
 			}
+			data.role = req.session.role;
 			res.json(data);
 		})
 	}

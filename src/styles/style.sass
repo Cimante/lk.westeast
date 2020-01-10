@@ -1,5 +1,6 @@
-@import "./node_modules/bootstrap/scss/bootstrap.scss"
 @import ui
+	
+@import "./node_modules/bootstrap/scss/bootstrap.scss"
 @import menu
 
 body 
@@ -26,8 +27,8 @@ body
 		color: white
 		&:active, &:focus
 			background-color: $dark !important
-			border-color: darken($yellow, 10%)
-			box-shadow: 0 0 0 .2rem rgba($yellow, .2)
+			border-color: darken($u-yellow, 10%)
+			box-shadow: 0 0 0 .2rem rgba($u-yellow, .2)
 			font-weight: 400
 			color: white
 	.input-group-text
@@ -51,7 +52,7 @@ body
 	.controls 
 		margin-top: 16px
 		.controls--exit
-			color: darken($yellow, 5%)
+			color: darken($u-yellow, 5%)
 
 	#addUser 
 		color: darken(white, 20%)
@@ -84,10 +85,10 @@ body
 
 	.far.fa-times-circle
 		font-size: 24px
-		color: darken($red, 10%) !important
+		color: darken($u-red, 10%) !important
 		transition: all .2s ease
 		&:hover 
-			color: $red !important
+			color: $u-red !important
 			cursor: pointer
 			transition: all .2s ease
 
@@ -131,8 +132,8 @@ span#invalid
 		color: white
 		&:active, &:focus
 			background-color: $dark !important
-			border-color: darken($yellow, 10%)
-			box-shadow: 0 0 0 .2rem rgba($yellow, .2)
+			border-color: darken($u-yellow, 10%)
+			box-shadow: 0 0 0 .2rem rgba($u-yellow, .2)
 			font-weight: 400
 			color: white
 	.input-group-text
@@ -192,3 +193,15 @@ aside.nav.nav-pills
 
 .badge.badge-danger
 	font-weight: 500 !important
+
+.table td 
+	vertical-align: middle
+
+#processed 
+	color: $u-green
+
+#rejected 
+	color: $u-red
+
+#viewed 
+	color: $u-yellow

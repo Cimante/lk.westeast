@@ -53,6 +53,7 @@ function ReadData(Arr, Selector) {
 			for (let key in data) {
 				// data-userID здесь, лежит в key
 				htmlString += `<tr>`;
+				if (data[key] === 'user') continue;
 				for (let item in data[key]) {
 					for (let item_0 in data[key][item]) {
 						if (item_0 === "_id") continue;
@@ -60,6 +61,26 @@ function ReadData(Arr, Selector) {
 							let tempDate = new Date(data[key][item].Date);
 							data[key][item].Date = `${addZero(tempDate.getDate())}-${addZero(tempDate.getMonth() + 1)}-${tempDate.getFullYear()}`;
 						}
+
+						// Преобразование статусов
+						if (item_0 === 'Status') {
+							switch(data[key][item][item_0]) {
+								case 'Отправлено':
+									htmlString += `<td>Новая</td>`;
+									break
+								case 'Просмотрено':
+									htmlString += `<td id="viewed">${data[key][item][item_0]}</td>`;
+									break 
+								case 'Обработано':
+									htmlString += `<td id="processed">${data[key][item][item_0]}</td>`;
+									break
+								case 'Отклонено':
+									htmlString += `<td id="rejected">${data[key][item][item_0]}</td>`;
+									break
+							}
+							continue;
+						}
+
 						// для пропусков:
 						if (item_0 === 'Starttime') continue;
 						if (item_0 === 'Endtime') {
@@ -69,8 +90,53 @@ function ReadData(Arr, Selector) {
 
 						htmlString += `<td>${data[key][item][item_0]}</td>`;
 					}
-					htmlString += `<td><button class="btn btn-danger btn-sm" id="deleteDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">Удалить</button></td>`;
+					
+					if ((data[key][item].Status === 'Отправлено' || data[key][item].Status === 'Просмотрено') && (data.role !== 'user')) {
+						htmlString += `<td>`;
+						htmlString += `<button class="btn btn-primary btn-sm mr-2" id="processedDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">
+									   <div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Обработана</button>`;
+						htmlString += `<button class="btn btn-danger btn-sm mr-2" id="rejectedDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">
+									   <div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Отклонить</button>`;
+						htmlString += `<button class="btn btn-outline-danger btn-sm" id="deleteDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">
+									   <div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Удалить</button>`;
+						htmlString += `</td>`;
+					} else {
+						htmlString += `<td><button class="btn btn-outline-danger btn-sm" id="deleteDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">Удалить</button></td>`;
+					}
 					htmlString += `</tr>`;
+
+					if (data[key][item].Status === 'Отправлено') {
+						let updateResponse = {
+							id: data[key][item]._id,
+							storage: Arr,
+							status: "Просмотрено"
+						}
+	
+						$.ajax({
+							url: '/update-status',
+							method: 'POST',
+							contentType: 'application/json',
+							data: JSON.stringify(updateResponse)
+						}).done(function() {
+							$.ajax({
+								url: '/get-counters',
+								type: 'POST',
+								contentType: 'application/json'
+							}).done(function(data) {
+								for (let key in data) {
+									$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
+									if ($(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text() === "0") {
+										$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').addClass('d-none');
+									} else $(`a.nav-link[data-query="${key}"]`).find('#counterBadge').removeClass('d-none');
+									
+								}
+							}).fail(function() {
+								alert('Ошибка чтения счётчиков')
+							})
+						}).fail(function(message) {
+							alert(`Ошибка: ${JSON.stringify(message)}`);
+						})
+					}
 				}
 			}
 			if (!$(`tbody${Selector}--body`).hasClass('animated')) $(`tbody${Selector}--body`).addClass("animated fadeIn faster");
@@ -153,8 +219,6 @@ function validate(inputs) {
 			delete storage.Email;
 		}
 	}
-
-	// console.log(errors);
 	return errors
 }
 
@@ -202,7 +266,7 @@ window.onload = function() {
 						}
 					}
 					}).fail(function() {})
-				}, 10000);
+				}, 3000);
 		}).fail(function(data) {});
 	});
 }
@@ -269,24 +333,14 @@ $(document).ready(function() {
 			alert('EXIT SUCCESS');
 		})
 	});
-	/*
-	$('button[form="createNewUser--Form"]').click(function() {
-		const data = getNewUserData();
-
-		$.ajax({
-			url: '/add-user',
-			type: 'POST',
-			data: data,
-		}).done(function(data) {
-			alert(`Пользователь ${data.email} успешно добавлен!`);
-			window.location.reload();
-		})
-	});
-	*/
 	
 	$('a[data-query]').click(function() {
 		ReadData($(this).data('query'), $(this).attr('href'));
 	});
+
+	const reloadData = setInterval(() => {
+		ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'))
+	}, 3000)
 	
 	// ===============================================================
 
@@ -298,7 +352,6 @@ $(document).ready(function() {
 		$.each(inputs, function(key, value) {
 			if (value.value.length !== 0) storage[value.name] = value.value;
 		});
-		console.log(validate(inputs));
 		if (validate(inputs).length === 0) {
 			if ($(this).data('storage')) {
 				storage.ArrayName = $(this).data('storage');
@@ -344,21 +397,6 @@ $(document).ready(function() {
 					$('input[name]').removeClass('is-invalid');
 				})
 			});
-
-			/*
-			$.ajax({
-				url:'/insert-data',
-				type: 'POST',
-				contentType: 'application/json',
-				data: JSON.stringify(storage)
-			}).done(function(data) {
-				alert('Успешно!');
-				window.location.reload();
-			}).fail(function(data) {
-				alert(`Всё пошло не по плану.\n${data.response}`);
-			})
-			*/
-
 		}
 	});
 
@@ -412,6 +450,45 @@ $(document).ready(function() {
 				window.location.reload();
 			})
 		}
+	});
+
+	$('body').on('click', 'button#processedDecl', function() {
+		$(this).find('div.spinner-border').removeClass('d-none')
+		let data = {
+			id: $(this).data('id'),
+			storage: $(this).data('storage'),
+			status: "Обработано"
+		}
+		$.ajax({
+			url: '/update-status',
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(data)
+		}).done(function() {
+			ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'));
+		}).fail(function(message) {
+			$(this).find('div.spinner-border').addClass('d-none')
+			alert(`Ошибка: ${message}`);
+		})
 	})
-	
+
+	$('body').on('click', 'button#rejectedDecl', function() {
+		$(this).find('div.spinner-border').removeClass('d-none')
+		let data = {
+			id: $(this).data('id'),
+			storage: $(this).data('storage'),
+			status: "Отклонено"
+		}
+		$.ajax({
+			url: '/update-status',
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(data)
+		}).done(function() {
+			ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'));
+		}).fail(function(message) {
+			$(this).find('div.spinner-border').addClass('d-none')
+			alert(`Ошибка: ${message}`);
+		})
+	})
 });

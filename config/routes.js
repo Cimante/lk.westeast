@@ -6,6 +6,7 @@ const ReadData = require('../app/controllers/ReadData');
 const DeleteUser = require('../app/controllers/DeleteUser');
 const DeleteData = require('../app/controllers/DeleteData');
 const countData = require('../app/controllers/countData');
+const updateStatus = require('../app/controllers/updateStatus');
 
 module.exports = (app) => {
 	app.post('/add-user', addUser.createUser);
@@ -28,4 +29,5 @@ module.exports = (app) => {
 	app.post('/delete-user', DeleteUser.DeleteUser);
 	app.post('/delete-data', DeleteData.DeleteData);
 	app.post('/get-counters', countData.Count);
+	app.post('/update-status', updateStatus.updateStatus);
 }

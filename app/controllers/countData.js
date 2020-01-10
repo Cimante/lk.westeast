@@ -49,6 +49,9 @@ const Count = (req, res) => {
 			res.status(200).json(data);
 		});
 	}
+	else {
+		res.status(200);
+	}
 }
 
 module.exports = { Count };
