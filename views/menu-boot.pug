@@ -3,10 +3,10 @@
 		aside.nav.flex-column.nav-pills#v-pills-tab.mt-2(role="tablist" aria-orientation="vertical")
 			if (user.role === 'admin')
 				a.nav-link.active#v-pills-one-tab(data-toggle="pill" href="#v-pills-one" role="tab" aria-controls="v-pills-one" aria-selected="true") Клиенты и компании
-				a.nav-link#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявки на звонок
+				a.nav-link#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявка в службу эксплуатации
 					span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 			else
-				a.nav-link.active#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявки на звонок
+				a.nav-link.active#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявка в службу эксплуатации
 					span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 
 			a.nav-link#create-pass-decl-tab(data-toggle="pill" data-query="Passports" href="#create-pass-decl" role="tab" aria-controls="create-pass-decl" aria-selected="false") Пропуск ВНОС/ВЫНОС
@@ -18,7 +18,7 @@
 			a.nav-link#create-docsorder-decl-tab(data-toggle="pill" data-query="DocsOrders" href="#create-docsorder-decl" role="tab" aria-controls="create-docsorder-decl" aria-selected="false") Заказ документов
 				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 
-			a.nav-link#create-carpass-decl-tab(data-toggle="pill" data-query="PassCars" href="#create-carpass-decl" role="tab" aria-controls="create-carpass-decl" aria-selected="false") Пропуски на авто
+			a.nav-link#create-carpass-decl-tab(data-toggle="pill" data-query="PassCars" href="#create-carpass-decl" role="tab" aria-controls="create-carpass-decl" aria-selected="false") Пропуска на авто
 				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 			//-
 				a.nav-link#create-personpass-decl-tab(data-toggle="pill" href="#create-personpass-decl" role="tab" aria-controls="create-personpass-decl" aria-selected="false") Пропуски на персону
@@ -43,12 +43,12 @@
 									th(scope="col") Имя
 									th(scope="col") Отчество
 									th(scope="col") Email
-									th(scope="col") Update / Delete
+									th(scope="col") 
 							tbody#content_0--body
 
 				.tab-pane.fade#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
 					.d-flex.justify-content-start.align-items-start.flex-column
-						h1.mb-3#heading Заявки на звонок
+						h1.mb-3#heading Заявка в службу эксплуатации
 						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-call-decl--modal")
 							i.fas.fa-plus.mr-2
 							| Добавить заявку
@@ -64,7 +64,7 @@
 			else 
 				.tab-pane.fade.show.active#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
 					.d-flex.justify-content-start.align-items-start.flex-column
-						h1.mb-3#heading Заявки на звонок
+						h1.mb-3#heading Заявка в службу эксплуатации
 						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-call-decl--modal")
 							i.fas.fa-plus.mr-2
 							| Добавить заявку
@@ -133,7 +133,7 @@
 
 			.tab-pane.fade#create-carpass-decl(role="tabpanel" aria-labelledby="create-carpass-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column
-					h1.mb-3#heading Пропуски на авто
+					h1.mb-3#heading Пропуска на авто
 					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-carpass-decl--modal")
 						i.fas.fa-plus.mr-2
 						| Добавить заявку
