@@ -5,7 +5,7 @@ const User = mongoose.model('User');
 
 const signIn = (req, res) => {
 	const { email, password } = JSON.parse(JSON.stringify(req.body));
-
+	
 	User.findOne({ Email: email })
 		.exec()
 		.then((user) => {

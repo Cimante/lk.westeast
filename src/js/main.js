@@ -383,6 +383,8 @@ $(document).ready(function() {
 				}).done(function(data) {
 					alert(`Пользователь ${data.email} успешно добавлен!`);
 					window.location.reload();
+				}).fail(function(data) {
+					alert(`${JSON.stringify(data)}`);
 				})
 
 			} else {

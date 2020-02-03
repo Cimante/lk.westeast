@@ -23,7 +23,7 @@ const InsertData = (req, res) => {
 			"FullCompanyName": req.body.FullCompanyName,
 			"ShortCompanyName": req.body.ShortCompanyName,
 			"Address": req.body.Address,
-			"INN": req.body.INN,
+			"INN": req.body.INN, // (req.body.INN.isNull()) ? "(не указан)" : req.body.INN;
 			"KPP": req.body.KPP,
 			"OGRN": req.body.OGRN,
 			"Bank": req.body.Bank,

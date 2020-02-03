@@ -1,25 +1,26 @@
 const mongoose = require('mongoose');
 
 // НЕ ИСПОЛЬЗУЙ ПОЛЕ "DEFAULT" - ОНО НАРУШАЕТ ПОРЯДОК
-const UserSchema = new mongoose.Schema({
+// Всякий раз, когда меняются атрибуты полей (unique/require и т.д.) пересоздавай базу :)
+const USchema = new mongoose.Schema({
 	FirstName			: { type: String, require: true },
 	LastName			: { type: String, require: true },
 	MiddleName			: { type: String, require: true },
-	Office				: { type: String, require: true, dropDubs: true },
-	Email				: { type: String, require: true, unique: true, dropDubs: true },
+	Office				: { type: String, require: true, unique: false, sparse: true },
+	Email				: { type: String, require: true, unique: false },
 	Password			: { type: String, require: true },
 	Phone				: { type: String, require: true },
 	Role				: { type: String, require: true },
 	FullCompanyName		: { type: String, require: true },
 	ShortCompanyName	: { type: String, require: true },
 	Address				: { type: String, require: true },
-	INN					: { type: String, require: true, unique: true, dropDubs: true },
-	KPP					: { type: String, require: true, unique: true, dropDubs: true },
-	OGRN				: { type: String, require: true, unique: true, dropDubs: true },
-	Bank				: { type: String, require: true },
-	BIK					: { type: String, require: true, unique: true, dropDubs: true },
-	CorporateAcc		: { type: String, require: true },
-	PaymentAcc			: { type: String, require: true },
+	INN					: { type: String, require: false, unique: false },
+	KPP					: { type: String, require: false, unique: false },
+	OGRN				: { type: String, require: false, unique: false },
+	Bank				: { type: String, require: false, unique: false },
+	BIK					: { type: String, require: false, unique: false },
+	CorporateAcc		: { type: String, require: false, unique: false },
+	PaymentAcc			: { type: String, require: false, unique: false },
 	Calls: [{
 		Office			: { type: String, require: true },
 		Date			: { type: Date, require: true},
@@ -67,4 +68,4 @@ const UserSchema = new mongoose.Schema({
 	}]
 });
 
-mongoose.model('User', UserSchema);
+mongoose.model('User', USchema);
