@@ -272,6 +272,10 @@ if (user.role === 'admin')
 						.col-6
 							label(for="create-carpass-decl--Gov-Num") Гос. номер:
 							input.form-control#create-carpass-decl--Gov-Num(type="text" name="GovermentNumber" required)
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-carpass-decl--Сargo") Груз
+							textarea.form-control#create-carpass-decl--Cargo(name="Cargo" rows="3")
 			.modal-footer
 				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
 				button.btn.btn-success(type='button' form="create-carpass-decl--Form" data-storage="PassCars") 

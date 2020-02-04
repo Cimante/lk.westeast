@@ -56,6 +56,7 @@ const USchema = new mongoose.Schema({
 		Date			: { type: Date, require: true },
 		CarBrand		: { type: String, require: true },
 		GovermentNumber : { type: String, require: true },
+		Cargo 			: { type: String, require: false },
 		Status			: { type: String, require: true }
 	}],
 	WorkersOrders: [{

@@ -207,7 +207,8 @@ function validate(inputs) {
 
 	if (storage.Date) {
 		let tempDate = new Date(storage.Date).getTime();
-		let currDate = new Date().getTime();
+		let now = new Date();
+		let currDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
 
 		if (tempDate < currDate) {
 			errors.push('Date');
@@ -252,7 +253,7 @@ window.onload = function() {
 		$('input[name="BIK"]').inputmask('9{9}');
 		$('input[name="CorporateAcc"]').inputmask('9{20}');
 		$('input[name="PaymentAcc"]').inputmask('9{20}');
-		$('input[name="GovermentNumber"]').inputmask('A 999 AA — 999');
+		$('input[name="GovermentNumber"]').inputmask('A 999 AA — 9{2,3}');
 
 		$.ajax({
 			url: '/get-counters',
