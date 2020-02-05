@@ -185,6 +185,14 @@ function validate(inputs) {
 	let storage = {};
 
 	$.each(inputs, function(key, value) {
+		// пропускаем Номер карты
+		if (value.name === 'CardID') {
+			storage[value.name] = "(не указан)";
+			return;
+		}
+
+		console.log('NAME: ', value.name)
+
 		if ((value.value.length === 0) || (value.value.indexOf('_') >= 0)) {
 			errors.push(value.name);
 		} else {
@@ -231,6 +239,7 @@ function validate(inputs) {
 		}
 	}
 
+	console.log(`${errors.length} | ${errors}`)
 	return errors
 }
 
@@ -363,6 +372,11 @@ $(document).ready(function() {
 		let inputs = $(`form#${ $(this).attr('form') }`).find("input, textarea");
 		let storage = {};
 		$.each(inputs, function(key, value) {
+			// пропускаем Номер карты
+			if (value.name === 'CardID') {
+				storage[value.name] = "(не указан)";
+				return;
+		}
 			if (value.value.length !== 0) storage[value.name] = value.value;
 		});
 		if (validate(inputs).length === 0) {

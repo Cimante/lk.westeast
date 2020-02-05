@@ -40,7 +40,7 @@ const USchema = new mongoose.Schema({
 	}],
 	LossCards: [{
 		Office 			: { type: String, require: true },
-		CardID			: { type: String, require: true },
+		CardID			: { type: String, require: false },
 		RegisteredIn 	: { type: String, require: true },
 		CompanyName 	: { type: String, require: true },
 		Status			: { type: String, require: true }
