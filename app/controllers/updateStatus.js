@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const guardMail = require('./guardMails');
 mongoose.set('useFindAndModify', false);
 
 const User = mongoose.model('User');
@@ -9,6 +10,8 @@ const User = mongoose.model('User');
 		id — id записи в массиве
 		storage — название массива
 		status — статус (отправлено/просмотрено/обработано/отклонено)
+
+	При статусах "Отклонена" и "Обработана" заявок [ Calls, Passports, PassCars, WorkersOrder ] отправляется письмо на info@westeast.biz
 */
 const updateStatus = (req, res) => {
 	if (req.session.role === 'admin') {
@@ -22,6 +25,14 @@ const updateStatus = (req, res) => {
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
+
+					// Отправка письма охране
+					for (let item of result.Calls) {
+						if (item._id == req.body.id) {
+							guardMail('в службу эксплуатации', req.body.status, item);
+						}
+					}
+
 					return res.status(200).json({result});
 				})
 				break
@@ -35,6 +46,14 @@ const updateStatus = (req, res) => {
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
+
+					// Отправка письма охране
+					for (let item of result.Passports) {
+						if (item._id == req.body.id) {
+							guardMail('на пропуск', req.body.status, item);
+						}
+					}
+
 					return res.status(200).json({result});
 				})
 				break
@@ -74,6 +93,14 @@ const updateStatus = (req, res) => {
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
+
+					// Отправка письма охране
+					for (let item of result.PassCars) {
+						if (item._id == req.body.id) {
+							guardMail('на пропуск для авто', req.body.status, item);
+						}
+					}
+
 					return res.status(200).json({result});
 				})
 				break
@@ -87,13 +114,20 @@ const updateStatus = (req, res) => {
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
+
+					// Отправка письма охране
+					for (let item of result.WorkersOrders) {
+						if (item._id == req.body.id) {
+							guardMail('на работы', req.body.status, item);
+						}
+					}
+
 					return res.status(200).json({result});
 				})
 				break
 			default: 
 				res.status(404).json({"err": "Такого хранилища не существует"})
 		} 
-		
 	}
 }
 
