@@ -35,6 +35,7 @@
 						h1.mb-5.mr-4#heading Клиенты и компании
 						span.spinner-border.mb-5.d-none(role="status" aria-hidden="true")
 					#content_0--heading
+					.table-wrapper-scroll-y.scrollbar
 						table.table.table-dark.table-striped.table-hover
 							thead
 								tr
@@ -52,15 +53,16 @@
 						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-call-decl--modal")
 							i.fas.fa-plus.mr-2
 							| Добавить заявку
-					table.table.table-dark.table-striped.table-hover
-						thead
-							tr
-								th(scope="col") Номер офиса
-								th(scope="col") Дата
-								th(scope="col") Время
-								th(scope="col") Статус
-								th(scope="col") 
-						tbody#create-call-decl--body
+					.table-wrapper-scroll-y.scrollbar
+						table.table.table-dark.table-striped.table-hover
+							thead
+								tr
+									th(scope="col") Номер офиса
+									th(scope="col") Дата
+									th(scope="col") Время
+									th(scope="col") Статус
+									th(scope="col") 
+							tbody#create-call-decl--body
 			else 
 				.tab-pane.fade.show.active#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
 					.d-flex.justify-content-start.align-items-start.flex-column
@@ -68,15 +70,16 @@
 						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-call-decl--modal")
 							i.fas.fa-plus.mr-2
 							| Добавить заявку
-					table.table.table-dark.table-striped.table-hover
-						thead
-							tr
-								th(scope="col") Номер офиса
-								th(scope="col") Дата
-								th(scope="col") Время
-								th(scope="col") Статус
-								th(scope="col")
-						tbody#create-call-decl--body
+					.table-wrapper-scroll-y.scrollbar
+						table.table.table-dark.table-striped.table-hover
+							thead
+								tr
+									th(scope="col") Номер офиса
+									th(scope="col") Дата
+									th(scope="col") Время
+									th(scope="col") Статус
+									th(scope="col")
+							tbody#create-call-decl--body
 
 			.tab-pane.fade#create-pass-decl(role="tabpanel" aria-labelledby="create-pass-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column
@@ -84,19 +87,20 @@
 					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-pass-decl--modal")
 						i.fas.fa-plus.mr-2
 						| Добавить заявку
-				table.table.table-dark.table-striped.table-hover
-					thead
-						tr
-							th(scope="col") Номер офиса
-							th(scope="col") Дата
-							th(scope="col") Время с-до
-							th(scope="col") Материальные ценности
-							th(scope="col") Кол-во
-							th(scope="col") Авто 
-							th(scope="col") Представитель арендатора 
-							th(scope="col") Статус
-							th(scope="col")
-					tbody#create-pass-decl--body
+				.table-wrapper-scroll-y.scrollbar
+					table.table.table-dark.table-striped.table-hover
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Дата
+								th(scope="col") Время с-до
+								th(scope="col") Материальные ценности
+								th(scope="col") Кол-во
+								th(scope="col") Авто 
+								th(scope="col") Представитель арендатора 
+								th(scope="col") Статус
+								th(scope="col")
+						tbody#create-pass-decl--body
 			
 			.tab-pane.fade#create-losscard-decl(role="tabpanel" aria-labelledby="create-losscard-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column
@@ -104,16 +108,17 @@
 					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-losscard-decl--modal")
 						i.fas.fa-plus.mr-2
 						| Добавить заявку
-				table.table.table-dark.table-striped.table-hover
-					thead
-						tr
-							th(scope="col") Номер офиса
-							th(scope="col") Номер карты
-							th(scope="col") Зарегистрирована на имя
-							th(scope="col") Название компании
-							th(scope="col") Статус
-							th(scope="col")
-					tbody#create-losscard-decl--body
+				.table-wrapper-scroll-y.scrollbar
+					table.table.table-dark.table-striped.table-hover
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Номер карты
+								th(scope="col") Зарегистрирована на имя
+								th(scope="col") Название компании
+								th(scope="col") Статус
+								th(scope="col")
+						tbody#create-losscard-decl--body
 
 			.tab-pane.fade#create-docsorder-decl(role="tabpanel" aria-labelledby="create-docsorder-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column
@@ -121,15 +126,16 @@
 					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-docsorder-decl--modal")
 						i.fas.fa-plus.mr-2
 						| Добавить заявку
-				table.table.table-dark.table-striped.table-hover
-					thead
-						tr
-							th(scope="col") Номер офиса
-							th(scope="col") Дата
-							th(scope="col") Вид документа
-							th(scope="col") Статус
-							th(scope="col")
-					tbody#create-docsorder-decl--body
+				.table-wrapper-scroll-y.scrollbar
+					table.table.table-dark.table-striped.table-hover
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Дата
+								th(scope="col") Вид документа
+								th(scope="col") Статус
+								th(scope="col")
+						tbody#create-docsorder-decl--body
 
 			.tab-pane.fade#create-carpass-decl(role="tabpanel" aria-labelledby="create-carpass-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column
@@ -137,17 +143,18 @@
 					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-carpass-decl--modal")
 						i.fas.fa-plus.mr-2
 						| Добавить заявку
-				table.table.table-dark.table-striped.table-hover
-					thead
-						tr
-							th(scope="col") Номер офиса
-							th(scope="col") Дата
-							th(scope="col") Марка авто
-							th(scope="col") Гос. номер
-							th(scope="col") Груз
-							th(scope="col") Статус
-							th(scope="col")
-					tbody#create-carpass-decl--body
+				.table-wrapper-scroll-y.scrollbar
+					table.table.table-dark.table-striped.table-hover
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Дата
+								th(scope="col") Марка авто
+								th(scope="col") Гос. номер
+								th(scope="col") Груз
+								th(scope="col") Статус
+								th(scope="col")
+						tbody#create-carpass-decl--body
 
 			.tab-pane.fade#create-personpass-decl(role="tabpanel" aria-labelledby="create-personpass-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column
@@ -155,16 +162,17 @@
 					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-personpass-decl--modal")
 						i.fas.fa-plus.mr-2
 						| Добавить заявку
-				table.table.table-dark.table-striped.table-hover
-					thead
-						tr
-							th(scope="col") Номер офиса
-							th(scope="col") Дата
-							th(scope="col") Серия/№ паспорта
-							th(scope="col") Фамилия/имя
-							th(scope="col") Статус
-							th(scope="col")
-					tbody#create-personpass-decl--body
+				.table-wrapper-scroll-y.scrollbar
+					table.table.table-dark.table-striped.table-hover
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Дата
+								th(scope="col") Серия/№ паспорта
+								th(scope="col") Фамилия/имя
+								th(scope="col") Статус
+								th(scope="col")
+						tbody#create-personpass-decl--body
 
 			.tab-pane.fade#create-works-decl(role="tabpanel" aria-labelledby="create-works-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column
@@ -172,15 +180,16 @@
 					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-works-decl--modal")
 						i.fas.fa-plus.mr-2
 						| Добавить заявку
-				table.table.table-dark.table-striped.table-hover
-					thead
-						tr
+				.table-wrapper-scroll-y.scrollbar
+					table.table.table-dark.table-striped.table-hover
+						thead
+							tr
 
-							th(scope="col") Номер офиса
-							th(scope="col") Дата
-							th(scope="col") Ответственный
-							th(scope="col") Телефон
-							th(scope="col") Вид работ
-							th(scope="col") Статус
-							th(scope="col")
-					tbody#create-works-decl--body
+								th(scope="col") Номер офиса
+								th(scope="col") Дата
+								th(scope="col") Ответственный
+								th(scope="col") Телефон
+								th(scope="col") Вид работ
+								th(scope="col") Статус
+								th(scope="col")
+						tbody#create-works-decl--body
