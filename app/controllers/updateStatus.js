@@ -17,18 +17,19 @@ const updateStatus = (req, res) => {
 	if (req.session.role === 'admin') {
 		switch(req.body.storage) {
 			case 'Calls':
-				User.updateOne({'Calls._id': req.body.id}, 
+				User.findOneAndUpdate({'Calls._id': req.body.id}, 
 					{$set: {
 						'Calls.$.Status': req.body.status
 					}
 				},
+				{ new: true },
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
 
 					// Отправка письма охране
 					for (let item of result.Calls) {
-						if (item._id == req.body.id) {
+						if (item._id == req.body.id && item.Status != "Просмотрено") {
 							guardMail('в службу эксплуатации', req.body.status, item);
 						}
 					}
@@ -38,18 +39,19 @@ const updateStatus = (req, res) => {
 				break
 
 			case 'Passports':
-				User.updateOne({'Passports._id': req.body.id}, 
+				User.findOneAndUpdate({'Passports._id': req.body.id}, 
 					{$set: {
 						'Passports.$.Status': req.body.status
 					}
 				},
+				{ new: true },
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
 
 					// Отправка письма охране
 					for (let item of result.Passports) {
-						if (item._id == req.body.id) {
+						if (item._id == req.body.id && item.Status != "Просмотрено") {
 							guardMail('на пропуск', req.body.status, item);
 						}
 					}
@@ -85,18 +87,19 @@ const updateStatus = (req, res) => {
 				break
 			
 			case 'PassCars':
-				User.updateOne({'PassCars._id': req.body.id}, 
+				User.findOneAndUpdate({'PassCars._id': req.body.id}, 
 					{$set: {
 						'PassCars.$.Status': req.body.status
 					}
 				},
+				{ new: true },
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
-
+					console.log(result)
 					// Отправка письма охране
 					for (let item of result.PassCars) {
-						if (item._id == req.body.id) {
+						if (item._id == req.body.id && item.Status != "Просмотрено") {
 							guardMail('на пропуск для авто', req.body.status, item);
 						}
 					}
@@ -106,18 +109,19 @@ const updateStatus = (req, res) => {
 				break
 
 			case 'WorkersOrders':
-				User.updateOne({'WorkersOrders._id': req.body.id}, 
+				User.findOneAndUpdate({'WorkersOrders._id': req.body.id}, 
 					{$set: {
 						'WorkersOrders.$.Status': req.body.status
 					}
 				},
+				{ new: true },
 				(err, result) => {
 					if (err) return res.status(500).json({"err": err});
 					if (!result) return res.status(404).json({"msg": "not found"})
 
 					// Отправка письма охране
 					for (let item of result.WorkersOrders) {
-						if (item._id == req.body.id) {
+						if (item._id == req.body.id && item.Status != "Просмотрено") {
 							guardMail('на работы', req.body.status, item);
 						}
 					}

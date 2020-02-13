@@ -497,7 +497,7 @@ $(document).ready(function() {
 			ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'));
 		}).fail(function(message) {
 			$(this).find('div.spinner-border').addClass('d-none')
-			alert(`Ошибка: ${message}`);
+			alert(`Ошибка: ${JSON.stringify(message)}`);
 		})
 	})
 
@@ -517,7 +517,7 @@ $(document).ready(function() {
 			ReadData($('a.nav-link.active').data('query'), $('a.nav-link.active').attr('href'));
 		}).fail(function(message) {
 			$(this).find('div.spinner-border').addClass('d-none')
-			alert(`Ошибка: ${message}`);
+			alert(`Ошибка: ${JSON.stringify(message)}`);
 		})
 	})
 });

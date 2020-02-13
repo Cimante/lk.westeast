@@ -19,7 +19,7 @@ const guardSendMails = (orderType, status, details) => {
 	
 	let changeOrder = `
 		<div style="color: #212529;">
-		<h2>Заявка ${ orderType }: <span style="color: ${(status === 'Обработана') ? '#17C671' : '#C4183C' }">${ status.toLocaleLowerCase() }</span></h2>
+		<h2>Заявка ${ orderType }: <span style="color: ${(status === 'Обработано') ? '#17C671' : '#C4183C' }">${ status.toLocaleLowerCase() }</span></h2>
 		<h3>Детали заявки:</h3>
 	`;
 	
