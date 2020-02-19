@@ -45,45 +45,50 @@ if (user.role === 'admin')
 							.col-12
 								label.my-0.mb-2(for="Address") Юридический адрес:
 								input.form-control#Address(type="text" name="Address" required)
-						//-
-							.row.form-group.dark-field.d-flex.align-items-center
-								.col-4
-									label.my-0.mb-2(for="INN") ИНН:
-									input.form-control#INN(type="text" name="INN" required)
-								.col-4
-									label.my-0.mb-2(for="KPP") КПП:
-									input.form-control#KPP(type="text" name="KPP" required)
-								.col-4
-									label.my-0.mb-2(for="OGRN") ОГРН:
-									input.form-control#OGRN(type="text" name="OGRN" required)
-
-							.row.form-group.dark-field.d-flex.align-items-center
-								.col-7
-									label.my-0.mb-2(for="Bank") Банк:
-									input.form-control#Bank(type="text" name="Bank" required)
-								.col-5
-									label.my-0.mb-2(for="BIK") БИК:
-									input.form-control#BIK(type="text" name="BIK" required)
-
-							.row.form-group.dark-field.d-flex.align-items-center
-								.col-6
-									label.my-0.mb-2(for="CorporateAcc") Корпоративный счёт:
-									input.form-control#CorporateAcc(type="text" name="CorporateAcc" required)
-								.col-6
-									label.my-0.mb-2(for="PaymentAcc") Расчётный счёт:
-									input.form-control#PaymentAcc(type="text" name="PaymentAcc" required)
-						
 				.modal-footer
 					button.btn.btn-dark(type='button', data-dismiss='modal') Закрыть
 					button.btn.btn-success(type='button' form="createNewUser--Form") 
 						i.fas.fa-user-plus.mr-2
 						| Добавить
 
+.modal.fade#create-guest-pass--modal(tabindex="-1" role="dialog" aria-hidden="true")
+	.modal-dialog.modal-dialog-centered(role="document")
+		.modal-content
+			.modal-header
+				h5.modal-title#create-guest-pass--title Добавление гостевого пропуска
+				button.close(type='button' data-dismiss='modal' aria-label='Close')
+					span(aria-hidden='true') 
+						i.far.fa-times-circle
+			.modal-body
+				form#create-guest-pass--Form(action="#" method="POST")
+					if (user.role === 'admin')
+						.row.form-group.dark-field.d-flex.align-items-center
+							.col-4
+								label(for="create-guest-pass--Office") Номер офиса:
+								input.form-control#create-guest-pass--Office(type="text" name="Office" required)
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-guest-pass--Name") ФИО:
+							input.form-control#create-guest-pass--Name(type="text" name="Name" required)
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-guest-pass--GuestName") ФИО гостя:
+							input.form-control#create-guest-pass--GuestName(type="text" name="GuestName" required)
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-guest-pass--ValidUntil") Действителен до:
+							input.form-control#create-guest-pass--ValidUntil(type="date" name="ValidUntil" required)
+			.modal-footer
+				button.btn.btn-dark(type="button", data-dismiss="modal") Закрыть
+				button.btn.btn-success(type='button' form="create-guest-pass--Form" data-storage="Guests") 
+					i.fas.fa-plus.mr-2
+					| Добавить заявку
+
 .modal.fade#create-call-decl--modal(tabindex="-1" role="dialog" aria-hidden="true")
 	.modal-dialog.modal-dialog-centered(role="document")
 		.modal-content
 			.modal-header
-				h5.modal-title#create-call-decl--title Добавление заявки на звонок
+				h5.modal-title#create-call-decl--title Добавление заявки в службу эксплуатации
 				button.close(type='button' data-dismiss='modal' aria-label='Close')
 					span(aria-hidden='true') 
 						i.far.fa-times-circle
@@ -94,6 +99,10 @@ if (user.role === 'admin')
 							.col-4
 								label(for="create-call-decl--Office") Номер офиса:
 								input.form-control#create-call-decl--Office(type="text" name="Office" required)
+					.row.form-group.dark-field.d-flex.align-items-center
+						.col-12
+							label(for="create-call-decl--Problem") Опишите вашу проблему:
+							textarea.form-control#create-call-decl--Problem(rows="4" name="Problem" required)
 					.row.form-group.dark-field.d-flex.align-items-center
 						.col-6
 							label(for="create-call-decl--Date") Дата:

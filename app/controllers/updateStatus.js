@@ -16,6 +16,28 @@ const User = mongoose.model('User');
 const updateStatus = (req, res) => {
 	if (req.session.role === 'admin') {
 		switch(req.body.storage) {
+			case 'Guests':
+				User.findOneAndUpdate({'Guests._id': req.body.id}, 
+					{$set: {
+						'Guests.$.Status': req.body.status
+					}
+				},
+				{ new: true },
+				(err, result) => {
+					if (err) return res.status(500).json({"err": err});
+					if (!result) return res.status(404).json({"msg": "not found"})
+
+					// Отправка письма охране
+					for (let item of result.Guests) {
+						if (item._id == req.body.id && item.Status != "Просмотрено") {
+							guardMail('на гостевой пропуск', req.body.status, item);
+						}
+					}
+
+					return res.status(200).json({result});
+				})
+				break
+
 			case 'Calls':
 				User.findOneAndUpdate({'Calls._id': req.body.id}, 
 					{$set: {

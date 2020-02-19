@@ -21,8 +21,16 @@ const USchema = new mongoose.Schema({
 	BIK					: { type: String, require: false, unique: false },
 	CorporateAcc		: { type: String, require: false, unique: false },
 	PaymentAcc			: { type: String, require: false, unique: false },
+	Guests: [{
+		Office			: { type: String, require: true },
+		Name			: { type: String, require: true },
+		GuestName		: { type: String, require: true },
+		ValidUntil		: { type: Date, require: true },
+		Status			: { type: String, require: true }
+	}],
 	Calls: [{
 		Office			: { type: String, require: true },
+		Problem			: { type: String, rqeuire: true },
 		Date			: { type: Date, require: true},
 		Timestamp		: { type: String, require: true },
 		Status			: { type: String, require: true },

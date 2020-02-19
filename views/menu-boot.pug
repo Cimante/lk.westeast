@@ -3,11 +3,14 @@
 		aside.nav.flex-column.nav-pills#v-pills-tab.mt-2(role="tablist" aria-orientation="vertical")
 			if (user.role === 'admin')
 				a.nav-link.active#v-pills-one-tab(data-toggle="pill" href="#v-pills-one" role="tab" aria-controls="v-pills-one" aria-selected="true") Клиенты и компании
-				a.nav-link#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявка в службу эксплуатации
+				a.nav-link#create-guest-pass-tab(data-toggle="pill" data-query="Guests" href="#create-guest-pass" role="tab" aria-controls="create-guest-pass" aria-selected="false") Гостевые пропуска
 					span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 			else
-				a.nav-link.active#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявка в службу эксплуатации
+				a.nav-link.active#create-guest-pass-tab(data-toggle="pill" data-query="Calls" href="#create-guest-pass" role="tab" aria-controls="create-guest-pass" aria-selected="false") Гостевые пропуска
 					span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
+
+			a.nav-link#create-call-decl-tab(data-toggle="pill" data-query="Calls" href="#create-call-decl" role="tab" aria-controls="create-call-decl" aria-selected="false") Заявка в службу эксплуатации
+				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
 
 			a.nav-link#create-pass-decl-tab(data-toggle="pill" data-query="Passports" href="#create-pass-decl" role="tab" aria-controls="create-pass-decl" aria-selected="false") Пропуск ВНОС/ВЫНОС
 				span.badge.badge-danger.float-right.animated.fadeIn.faster#counterBadge
@@ -47,10 +50,10 @@
 									th(scope="col") 
 							tbody#content_0--body
 
-				.tab-pane.fade#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
+				.tab-pane.fade#create-guest-pass(role="tabpanel" aria-labelledby="create-guest-pass-tab")
 					.d-flex.justify-content-start.align-items-start.flex-column
-						h1.mb-3#heading Заявка в службу эксплуатации
-						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-call-decl--modal")
+						h1.mb-3#heading Гостевые пропуска
+						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-guest-pass--modal")
 							i.fas.fa-plus.mr-2
 							| Добавить заявку
 					.table-wrapper-scroll-y.scrollbar
@@ -58,28 +61,49 @@
 							thead
 								tr
 									th(scope="col") Номер офиса
-									th(scope="col") Дата
-									th(scope="col") Время
-									th(scope="col") Статус
-									th(scope="col") 
-							tbody#create-call-decl--body
-			else 
-				.tab-pane.fade.show.active#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
-					.d-flex.justify-content-start.align-items-start.flex-column
-						h1.mb-3#heading Заявка в службу эксплуатации
-						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-call-decl--modal")
-							i.fas.fa-plus.mr-2
-							| Добавить заявку
-					.table-wrapper-scroll-y.scrollbar
-						table.table.table-dark.table-striped.table-hover
-							thead
-								tr
-									th(scope="col") Номер офиса
-									th(scope="col") Дата
-									th(scope="col") Время
+									th(scope="col") ФИО
+									th(scope="col") ФИО гостя
+									th(scope="col") Действителен до:
 									th(scope="col") Статус
 									th(scope="col")
-							tbody#create-call-decl--body
+							tbody#create-guest-pass--body
+			else 
+				.tab-pane.fade.show.active#create-guest-pass(role="tabpanel" aria-labelledby="create-guest-pass-tab")
+					.d-flex.justify-content-start.align-items-start.flex-column
+						h1.mb-3#heading Гостевые пропуска
+						button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-guest-pass--modal")
+							i.fas.fa-plus.mr-2
+							| Добавить заявку
+					.table-wrapper-scroll-y.scrollbar
+						table.table.table-dark.table-striped.table-hover
+							thead
+								tr
+									th(scope="col") Номер офиса
+									th(scope="col") ФИО
+									th(scope="col") ФИО гостя
+									th(scope="col") Действителен до:
+									th(scope="col") Статус
+									th(scope="col")
+							tbody#create-guest-pass--body
+
+
+			.tab-pane.fade#create-call-decl(role="tabpanel" aria-labelledby="create-call-decl-tab")
+				.d-flex.justify-content-start.align-items-start.flex-column
+					h1.mb-3#heading Заявка в службу эксплуатации
+					button.btn.btn-sm.btn-outline-success.mb-5(type="button" data-toggle="modal" data-target="#create-call-decl--modal")
+						i.fas.fa-plus.mr-2
+						| Добавить заявку
+				.table-wrapper-scroll-y.scrollbar
+					table.table.table-dark.table-striped.table-hover
+						thead
+							tr
+								th(scope="col") Номер офиса
+								th(scope="col") Проблема
+								th(scope="col") Дата
+								th(scope="col") Время
+								th(scope="col") Статус
+								th(scope="col")
+						tbody#create-call-decl--body
 
 			.tab-pane.fade#create-pass-decl(role="tabpanel" aria-labelledby="create-pass-decl-tab")
 				.d-flex.justify-content-start.align-items-start.flex-column

@@ -58,9 +58,14 @@ function ReadData(Arr, Selector) {
 				for (let item in data[key]) {
 					for (let item_0 in data[key][item]) {
 						if (item_0 === "_id") continue;
+						console.log(item_0)
 						if (item_0 === "Date") {
 							let tempDate = new Date(data[key][item].Date);
 							data[key][item].Date = `${addZero(tempDate.getDate())}-${addZero(tempDate.getMonth() + 1)}-${tempDate.getFullYear()}`;
+						}
+						if (item_0 === "ValidUntil") {
+							let tempDate = new Date(data[key][item].ValidUntil);
+							data[key][item].ValidUntil = `${addZero(tempDate.getDate())}-${addZero(tempDate.getMonth() + 1)}-${tempDate.getFullYear()}`
 						}
 
 						// Преобразование статусов

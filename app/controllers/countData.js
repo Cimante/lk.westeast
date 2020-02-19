@@ -6,6 +6,7 @@ const Count = (req, res) => {
 		User.find({Role: 'user'}, function(err, result) {
 			if (err) throw err;
 			let data = {
+				Guests: 0,
 				Calls: 0,
 				Passports: 0,
 				LossCards: 0,
@@ -14,6 +15,11 @@ const Count = (req, res) => {
 				WorkersOrders: 0
 			};
 			for (let key in result) {
+				for (item in result[key].Guests) {
+					if (result[key].Guests[item].Status === 'Отправлено') {
+						data.Guests += 1;
+					};
+				}
 				for (item in result[key].Calls) {
 					if (result[key].Calls[item].Status === 'Отправлено') {
 						data.Calls += 1;

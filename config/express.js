@@ -15,7 +15,8 @@ module.exports = (app) => {
 		resave: false,
 		saveUninitialized: false,
 		store: new mongoStore({
-			url: 'mongodb+srv://dbUser:qa147896325++@lk-westeast-9iq7k.mongodb.net/Sessions?retryWrites=true&w=majority'
+			// url: 'mongodb+srv://dbUser:qa147896325++@lk-westeast-9iq7k.mongodb.net/Sessions?retryWrites=true&w=majority'
+			url : 'mongodb+srv://lk-westeast:qa147896325++@lk-cluster-1asy1.azure.mongodb.net/Sessions?retryWrites=true&w=majority'
 		})
 	}))
 };
