@@ -30,6 +30,8 @@ const guardSendMails = (orderType, status, details) => {
 			case '_id'				: continue;
 			case 'Status'			: continue;
 			case 'Office'			: { changeOrder += `<p><b>Офис:</b> ${ details[item] }</p>`; break }
+			case 'Name'				: { changeOrder += `<p><b>ФИО: </b> ${ details[item] }</p>`; break }
+			case 'GuestName'		: { changeOrder += `<p><b>ФИО гостя: </b> ${ details[item] }</p>`; break }
 			case 'Problem'			: { changeOrder += `<p><b>Описание проблемы:</b> ${ details[item] }</p>`; break }
 			case 'Date'				: { changeOrder += `<p><b>Дата:</b> ${ addZero(details[item].getDate()) }.${ addZero(details[item].getMonth() + 1) }.${details[item].getFullYear()}</p>`; break }
 			case 'ValidUntil'		: { changeOrder += `<p><b>Действителен до:</b> ${ addZero(details[item].getDate()) }.${ addZero(details[item].getMonth() + 1) }.${details[item].getFullYear()}</p>`; break }
