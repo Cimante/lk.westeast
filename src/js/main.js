@@ -255,7 +255,7 @@ window.onload = function() {
 		if ($('a.nav-link.active').attr('id') === 'v-pills-one-tab') {
 			ReadUsers();
 		} else {
-			ReadData('Calls', '#create-call-decl');
+			ReadData('Guests', '#create-guest-pass');
 		}
 
 		// маски ввода
