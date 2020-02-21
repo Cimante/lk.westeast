@@ -10,7 +10,7 @@ const signIn = (req, res) => {
 		.exec()
 		.then((user) => {
 			if (!user) {
-				res.status(401).json({ message: 'Неверная пара email / пароль' });
+				res.status(401).json({ message: 'Неверная пара email / пароль' }); // пользователя не существует в БД
 			}
 			const isValid = bCrypt.compareSync(password, user.Password);
 
@@ -26,8 +26,7 @@ const signIn = (req, res) => {
 			} else {
 				res.status(401).json({ message: 'Неверная пара email / пароль' });
 			}
-		})
-		.catch(err => res.status(500).json({message: err.message}));
+		}).catch(err => res.status(500).json({message: err.message}));
 };
 
 module.exports = {
