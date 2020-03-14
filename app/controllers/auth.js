@@ -5,13 +5,15 @@ const User = mongoose.model('User');
 
 const signIn = (req, res) => {
 	const { email, password } = JSON.parse(JSON.stringify(req.body));
-	
+
 	User.findOne({ Email: email })
 		.exec()
 		.then((user) => {
+			/*
 			if (!user) {
-				res.status(401).json({ message: 'Неверная пара email / пароль' }); // пользователя не существует в БД
+				res.status(401).json({ message: 'пользователя не существует в БД' }); // пользователя не существует в БД
 			}
+			*/
 			const isValid = bCrypt.compareSync(password, user.Password);
 
 			if (isValid) {
@@ -26,7 +28,7 @@ const signIn = (req, res) => {
 			} else {
 				res.status(401).json({ message: 'Неверная пара email / пароль' });
 			}
-		}).catch(err => res.status(500).json({message: err.message}));
+		}).catch(err => res.status(500).json({message: 'Неверная пара email / пароль'}));
 };
 
 module.exports = {

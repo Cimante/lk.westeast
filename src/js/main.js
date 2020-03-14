@@ -48,109 +48,99 @@ function ReadData(Arr, Selector) {
 		contentType: 'application/json',
 		data: JSON.stringify({Arr: Arr})
 	}).done(function(data) {
-		$(document).ready(function() {
+		if (data.length > 0) $(document).ready(function() {
 			var htmlString = "";
-			for (let key in data) {
-				// data-userID здесь, лежит в key
-				if (data[key].length === 0) continue;
-				htmlString += `<tr>`;
-				if (data[key] === 'user') continue;
-				for (let item in data[key]) {
-					for (let item_0 in data[key][item]) {
-						if (item_0 === "_id") continue;
-						if (item_0 === "Date") {
-							let tempDate = new Date(data[key][item].Date);
-							data[key][item].Date = `${addZero(tempDate.getDate())}-${addZero(tempDate.getMonth() + 1)}-${tempDate.getFullYear()}`;
-						}
-						if (item_0 === "ValidUntil") {
-							let tempDate = new Date(data[key][item].ValidUntil);
-							data[key][item].ValidUntil = `${addZero(tempDate.getDate())}-${addZero(tempDate.getMonth() + 1)}-${tempDate.getFullYear()}`
-						}
-
-						// Преобразование статусов
-						if (item_0 === 'Status') {
-							switch(data[key][item][item_0]) {
-								case 'Отправлено':
-									htmlString += `<td>Новая</td>`;
-									break
-								case 'Просмотрено':
-									htmlString += `<td id="viewed">${data[key][item][item_0]}</td>`;
-									break 
-								case 'Обработано':
-									htmlString += `<td id="processed">${data[key][item][item_0]}</td>`;
-									break
-								case 'Отклонено':
-									htmlString += `<td id="rejected">${data[key][item][item_0]}</td>`;
-									break
-							}
-							continue;
-						}
-
-						// для пропусков:
-						if (item_0 === 'Starttime') continue;
-						if (item_0 === 'Endtime') {
-							htmlString += `<td>${data[key][item].Starttime} - ${data[key][item].Endtime}</td>`;
-							continue;
-						}
-
-						htmlString += `<td>${data[key][item][item_0]}</td>`;
+			for (let row in data) {
+				htmlString += '<tr>';
+				for (let item in data[row]) {
+					if (item == "_id" || item == "role" || item == "UserID") continue;
+					if (item == "Date" || item == "ValidUntil") {
+						let tempDate = new Date(data[row][item]);
+						data[row][item] = `${addZero(tempDate.getDate())}-${addZero(tempDate.getMonth() + 1)}-${tempDate.getFullYear()}`;
 					}
-					
-					if ((data[key][item].Status === 'Отправлено' || data[key][item].Status === 'Просмотрено') && (data.role !== 'user')) {
-						htmlString += `<td>`;
-						htmlString += `<button class="btn btn-primary btn-sm mr-2" id="processedDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">
-									   <div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Обработана</button>`;
-						htmlString += `<button class="btn btn-danger btn-sm mr-2" id="rejectedDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">
-									   <div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Отклонить</button>`;
-						htmlString += `<button class="btn btn-outline-danger btn-sm" id="deleteDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">
-									   <div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Удалить</button>`;
-						htmlString += `</td>`;
-					} else {
-						htmlString += `<td><button class="btn btn-outline-danger btn-sm" id="deleteDecl" data-id="${data[key][item]._id}" data-userID="${key}" data-storage="${Arr}">Удалить</button></td>`;
-					}
-					htmlString += `</tr>`;
 
-					if (data[key][item].Status === 'Отправлено') {
-						let updateResponse = {
-							id: data[key][item]._id,
-							storage: Arr,
-							status: "Просмотрено"
+					// преобразование статусов
+					if (item === 'Status') {
+						switch(data[row][item]) {
+							case 'Отправлено':
+								htmlString += `<td>Новая</td>`;
+								break;
+							case 'Просмотрено':
+								htmlString += '<td id="viewed">Просмотрено</td>';
+								break;
+							case 'Обработано': 
+								htmlString += '<td id="processed">Обработано</td>';
+								break;
+							case 'Отклонено':
+								htmlString += '<td id="rejected">Отклонено</td>'
 						}
-	
+						continue;
+					}
+
+					// для пропусков
+					if (item === "Starttime") continue;
+					if (item === "Endtime") {
+						htmlString += `<td>${data[row]["Starttime"]} - ${data[row]["Endtime"]}</td>`;
+						continue;
+					}
+					// общий случай (для всего остального):
+					htmlString += `<td>${data[row][item]}</td>`
+				}
+
+				// кнопочки:
+				if ((data[row]["Status"] === 'Отправлено' || data[row]["Status"] === 'Просмотрено') && (data[row]["Role"] !== 'user')) {
+					htmlString += `<td>`;
+					htmlString += `<button class="btn btn-primary btn-sm mr-2" id="processedDecl" data-id="${data[row]["_id"]}" data-userID="${data[row]["UserID"]}" data-storage="${Arr}">
+						<div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Обработана</button>`;
+					htmlString += `<button class="btn btn-danger btn-sm mr-2" id="rejectedDecl" data-id="${data[row]["_id"]}" data-userID="${data[row]["UserID"]}" data-storage="${Arr}">
+						<div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Отклонить</button>`;
+					htmlString += `<button class="btn btn-outline-danger btn-sm mr-2" id="deleteDecl" data-id="${data[row]["_id"]}" data-userID="${data[row]["UserID"]}" data-storage="${Arr}">
+						<div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status"></div>Удалить</button>`;
+					htmlString += `</td>`;
+				} else {
+					htmlString += `<td><button class="btn btn-outline-danger btn-sm" id="deleteDecl" data-id="${data[row]["_id"]}" data-userID="${data[row]["UserID"]}" data-storage="${Arr}">Удалить</button></td>`;
+				}
+				htmlString += `</tr>`;
+
+				if (data[row]["Status"] === 'Отправлено') {
+					let updateResponse = {
+						id: data[row]["_id"],
+						storage: Arr,
+						status: "Просмотрено"
+					}
+
+					$.ajax({
+						url: '/update-status',
+						method: 'POST',
+						contentType: 'application/json',
+						data: JSON.stringify(updateResponse)
+					}).done(function() {
 						$.ajax({
-							url: '/update-status',
-							method: 'POST',
+							url: '/get-counters',
+							type: 'POST',
 							contentType: 'application/json',
-							data: JSON.stringify(updateResponse)
-						}).done(function() {
-							$.ajax({
-								url: '/get-counters',
-								type: 'POST',
-								contentType: 'application/json'
-							}).done(function(data) {
-								for (let key in data) {
-									if (data[key] > 0) {
-										$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').removeClass('d-none');
-										$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
-									} else {
-										if (!$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').hasClass('d-none')) {
-											$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').addClass('d-none');
-										}
-									}
-									
-									/*
-									if ($(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text() === "0") {
+						}).done(function(data) {
+							for (let key in data) {
+								if (data[key] > 0) {
+									$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').removeClass('d-none');
+									$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text(data[key]);
+								} else {
+									if (!$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').hasClass('d-none')) {
 										$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').addClass('d-none');
-									} else $(`a.nav-link[data-query="${key}"]`).find('#counterBadge').removeClass('d-none');
-									*/
+									}
 								}
-							}).fail(function() {
-								alert('Ошибка чтения счётчиков')
-							})
-						}).fail(function(message) {
-							alert(`Ошибка: ${JSON.stringify(message)}`);
+								
+								if ($(`a.nav-link[data-query="${key}"]`).find('#counterBadge').text() === "0") {
+									$(`a.nav-link[data-query="${key}"]`).find('#counterBadge').addClass('d-none');
+								} else $(`a.nav-link[data-query="${key}"]`).find('#counterBadge').removeClass('d-none');
+								
+							}
+						}).fail(function() {
+							alert('Ошибка чтения счётчиков')
 						})
-					}
+					}).fail(function(message) {
+						alert(`Ошибка: ${JSON.stringify(message)}`);
+					})
 				}
 			}
 			if (!$(`tbody${Selector}--body`).hasClass('animated')) $(`tbody${Selector}--body`).addClass("animated fadeIn faster");
