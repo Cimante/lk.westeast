@@ -46,3 +46,11 @@ app.get('/create-success', function (req, res) {
 app.get('/dashboard', function (req, res) {
   res.render('dashboard.pug');
 });
+
+app.get('/.well-known/acme-challenge/evOlGARQHBsG3DQWrufyaPcgQlh7c0ql6hO_1AkM-kk', function(req, res) {
+  res.sendFile('.well-known/acme-challenge/evOlGARQHBsG3DQWrufyaPcgQlh7c0ql6hO_1AkM-kk');
+})
+
+app.get('/.well-known/acme-challenge/Ur6-UQVui9qV28kvju-IdbjKxXbYOjxoMi8lRgBWYJU', function(req, res) {
+  res.sendFile('.well-known/acme-challenge/Ur6-UQVui9qV28kvju-IdbjKxXbYOjxoMi8lRgBWYJU');
+})
