@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 require('./app/models');
 
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 const app = express();
@@ -21,11 +22,18 @@ const mongoPresets = { useNewUrlParser: true, useUnifiedTopology: true };
 const mongo = new MongoClient(config.mongoUri, mongoPresets);
 
 mongoose.connect(mongoUri, mongoPresets)
-    .then(() => https.createServer({
-      key: fs.readFileSync('./private.key'),
-      cert: fs.readFileSync('./certificate.crt'),
-      passphrase: 'w381nn0v4710n'
-    }, app).listen(appPort))
+    .then(() => { 
+      https.createServer({
+        key: fs.readFileSync('./private.key'),
+        cert: fs.readFileSync('./certificate.crt'),
+        passphrase: 'w381nn0v4710n'
+      }, app).listen(appPort)
+
+      http.createServer(function(req, res) {
+        res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url});
+        res.end();
+      }).listen(80);
+  })
     .catch((err) => console.log(`Error connecting to mongo: ${mongoUri}`, err));
 
 app.get('/', (req, res) => {

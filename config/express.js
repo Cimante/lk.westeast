@@ -3,7 +3,7 @@
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 
 module.exports = (app) => {
 	app.use(bodyParser.json());
