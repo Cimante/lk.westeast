@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('./app/models');
 
+const https = require('https');
+const fs = require('fs');
+
 const app = express();
 require('./config/express')(app);
 require('./config/routes')(app);
@@ -16,14 +19,14 @@ app.set('view engine', 'pug');
 const MongoClient = require('mongodb').MongoClient;
 const mongoPresets = { useNewUrlParser: true, useUnifiedTopology: true };
 const mongo = new MongoClient(config.mongoUri, mongoPresets);
-const dbname = "lk-westaset";
 
 mongoose.connect(mongoUri, mongoPresets)
-  .then(() => app.listen(appPort, function () {
-      console.log(`Waiting you on port ${appPort}`);
-    })
-  )
-  .catch((err) => console.error(`Error connecting to mongo: ${mongoUri}`, err))
+    .then(() => https.createServer({
+      key: fs.readFileSync('./private.key'),
+      cert: fs.readFileSync('./certificate.crt'),
+      passphrase: 'w381nn0v4710n'
+    }, app).listen(appPort))
+    .catch((err) => console.log(`Error connecting to mongo: ${mongoUri}`, err));
 
 app.get('/', (req, res) => {
   const id = req.session.id;

@@ -5,6 +5,6 @@ module.exports = {
 };
 */
 module.exports = {
-	appPort: 3301,
+	appPort: 443,
 	mongoUri: 'mongodb+srv://lk-westeast:qa147896325++@lk-cluster-1asy1.azure.mongodb.net/lkwestDB?retryWrites=true&w=majority'
 }
