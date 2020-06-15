@@ -1,3 +1,4 @@
 node_modules
 certificate.crt 
 private.key
+ca_bundle.crt

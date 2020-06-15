@@ -26,6 +26,7 @@ mongoose.connect(mongoUri, mongoPresets)
       https.createServer({
         key: fs.readFileSync('./private.key'),
         cert: fs.readFileSync('./certificate.crt'),
+        ca: fs.readFileSync('./ca_bundle.crt'),
         passphrase: 'w381nn0v4710n'
       }, app).listen(appPort)
 
